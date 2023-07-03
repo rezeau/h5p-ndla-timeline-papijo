@@ -1,0 +1,1218 @@
+[
+  {
+    "label": "Show title slide",
+    "name": "showTitleSlide",
+    "type": "boolean",
+    "default": false
+  },
+  {
+    "label": "Title slide",
+    "name": "titleSlide",
+    "importance": "low",
+    "type": "group",
+    "fields": [
+      {
+        "label": "Slide type",
+        "name": "slideType",
+        "type": "text",
+        "default": "title",
+        "widget": "none"
+      },
+      {
+        "label": "Title",
+        "name": "title",
+        "type": "text"
+      },
+      {
+        "label": "Start date",
+        "description": "YYYY-MM-DD — only year is required. Years can be negative.",
+        "name": "startDate",
+        "type": "text",
+        "optional": true,
+        "regexp": {
+          "pattern": "^(-?)\\d{1,}(-(1[012]|[0]?[1-9])(-([12][0-9]|3[01]|[0]?[1-9]))?)?$"
+        }
+      },
+      {
+        "label": "End date",
+        "description": "YYYY-MM-DD — only year is required. Years can be negative.",
+        "name": "endDate",
+        "type": "text",
+        "optional": true,
+        "regexp": {
+          "pattern": "^(-?)\\d{1,}(-(1[012]|[0]?[1-9])(-([12][0-9]|3[01]|[0]?[1-9]))?)?$"
+        }
+      },
+      {
+        "label": "Description",
+        "name": "description",
+        "type": "library",
+        "options": [
+          "H5P.AdvancedTextPapiJo 1.1"
+        ]
+      },
+      {
+        "label": "Layout",
+        "name": "layout",
+        "type": "select",
+        "default": "right",
+        "options": [
+          {
+            "label": "Text on right (standard)",
+            "value": "right"
+          },
+          {
+            "label": "Text on left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "label": "Media type",
+        "name": "mediaType",
+        "type": "select",
+        "options": [
+          {
+            "label": "Image",
+            "value": "image"
+          },
+          {
+            "label": "Video",
+            "value": "video"
+          },
+          {
+            "label": "Audio",
+            "value": "audio"
+          },
+          {
+            "label": "External link",
+            "value": "custom"
+          },
+          {
+            "label": "None",
+            "value": "none"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "label": "Image",
+        "name": "image",
+        "type": "image",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "mediaType",
+              "equals": "image"
+            }
+          ]
+        }
+      },
+      {
+        "label": "Alternative text",
+        "description": "Required. If the browser can't load the image this text will be displayed instead. Also used by \"text-to-speech\" readers.",
+        "name": "imageAlt",
+        "type": "text",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "mediaType",
+              "equals": "image"
+            }
+          ]
+        }
+      },
+      {
+        "label": "Video",
+        "name": "video",
+        "type": "video",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "mediaType",
+              "equals": "video"
+            }
+          ]
+        }
+      },
+      {
+        "label": "Audio",
+        "name": "audio",
+        "type": "audio",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "mediaType",
+              "equals": "audio"
+            }
+          ]
+        }
+      },
+      {
+        "label": "External link",
+        "description": "Insert a link to external resources. Certain websites will be rendered as specialized embeds, such as Twitter, YouTube, Wikipedia, and Google Maps. See full list in the <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>",
+        "name": "customMedia",
+        "type": "text",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "mediaType",
+              "equals": "custom"
+            }
+          ]
+        }
+      },
+      {
+        "name": "info",
+        "label": "Information",
+        "importance": "high",
+        "type": "group",
+        "expanded": false,
+        "fields": [
+          {
+            "name": "credit",
+            "type": "text",
+            "label": "Credit",
+            "importance": "low",
+            "description": "Credits to the media",
+            "optional": true,
+            "widget": "html",
+            "tags": [
+              "a",
+              "strong",
+              "em"
+            ]
+          },
+          {
+            "name": "caption",
+            "type": "text",
+            "label": "Caption",
+            "importance": "low",
+            "description": "Caption text",
+            "optional": true,
+            "widget": "html",
+            "tags": [
+              "a",
+              "strong",
+              "em"
+            ]
+          }
+        ],
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "mediaType",
+              "equals": [
+                "image",
+                "audio",
+                "video",
+                "custom"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "label": "Appearance",
+        "name": "appearance",
+        "type": "group",
+        "importance": "low",
+        "fields": [
+          {
+            "label": "Background",
+            "name": "backgroundType",
+            "type": "select",
+            "default": "none",
+            "options": [
+              {
+                "label": "Color",
+                "value": "color"
+              },
+              {
+                "label": "Image",
+                "value": "image"
+              },
+              {
+                "label": "None",
+                "value": "none"
+              }
+            ]
+          },
+          {
+            "label": "Background color",
+            "name": "backgroundColor",
+            "type": "text",
+            "widget": "showWhen",
+            "showWhen": {
+              "rules": [
+                {
+                  "field": "backgroundType",
+                  "equals": "color"
+                }
+              ],
+              "widget": "colorSelector"
+            },
+            "default": "#757575",
+            "spectrum": {
+              "showPalette": true,
+              "showPaletteOnly": true,
+              "palette": [
+                [
+                  "#757575",
+                  "#cd2026",
+                  "#B45918",
+                  "#3D854D",
+                  "#1d5cff",
+                  "#2869B8",
+                  "#057CB3",
+                  "#674ea7",
+                  "#a64d79"
+                ],
+                [
+                  "#5c5c5c",
+                  "#B01C21",
+                  "#8b4513",
+                  "#337040",
+                  "#003ACC",
+                  "#205493",
+                  "#04608B",
+                  "#56418B",
+                  "#8C4066"
+                ],
+                [
+                  "#2e2e2e",
+                  "#8D161A",
+                  "#6C350F",
+                  "#275430",
+                  "#002EA3",
+                  "#1A4375",
+                  "#034563",
+                  "#351c75",
+                  "#741b47"
+                ],
+                [
+                  "#000000",
+                  "#6A1114",
+                  "#48240A",
+                  "#1A3820",
+                  "#00237A",
+                  "#123054",
+                  "#02293B",
+                  "#20124d",
+                  "#4c1130"
+                ]
+              ]
+            }
+          },
+          {
+            "label": "Background image",
+            "name": "backgroundImage",
+            "type": "image",
+            "widget": "showWhen",
+            "showWhen": {
+              "rules": [
+                {
+                  "field": "backgroundType",
+                  "equals": "image"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "widget": "showWhen",
+    "showWhen": {
+      "rules": [
+        {
+          "field": "showTitleSlide",
+          "equals": true
+        }
+      ]
+    }
+  },
+  {
+    "label": "Timeline items",
+    "name": "timelineItems",
+    "type": "list",
+    "entity": "Timeline item",
+    "importance": "low",
+    "widgets": [
+      {
+        "name": "VerticalTabs",
+        "label": "Default"
+      }
+    ],
+    "field": {
+      "label": "Item",
+      "name": "timelineItem",
+      "importance": "low",
+      "type": "group",
+      "fields": [
+        {
+          "label": "Slide type",
+          "name": "slideType",
+          "type": "text",
+          "default": "regular",
+          "widget": "none"
+        },
+        {
+          "label": "Title",
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "label": "Start date",
+          "description": "YYYY-MM-DD — only year is required. Years can be negative.",
+          "name": "startDate",
+          "type": "text",
+          "optional": false,
+          "regexp": {
+            "pattern": "^(-?)\\d{1,}(-(1[012]|[0]?[1-9])(-([12][0-9]|3[01]|[0]?[1-9]))?)?$"
+          }
+        },
+        {
+          "label": "End date",
+          "description": "YYYY-MM-DD — only year is required. Years can be negative.",
+          "name": "endDate",
+          "type": "text",
+          "optional": true,
+          "regexp": {
+            "pattern": "^(-?)\\d{1,}(-(1[012]|[0]?[1-9])(-([12][0-9]|3[01]|[0]?[1-9]))?)?$"
+          }
+        },
+        {
+          "label": "Text Or Image?",
+          "name": "TextOrImage",
+          "type": "select",
+          "default": "text",
+          "options": [
+            {
+              "label": "Text",
+              "value": "text"
+            },
+            {
+              "label": "Image",
+              "value": "image"
+            }
+          ]
+        },
+        {
+          "label": "Description",
+          "name": "description",
+          "type": "library",
+          "options": [
+            "H5P.AdvancedTextPapiJo 1.1"
+          ],
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "TextOrImage",
+                "equals": "text"
+              }
+            ]
+          }
+        },
+        {
+          "label": "description Image",
+          "name": "descriptionImage",
+          "type": "image",
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "TextOrImage",
+                "equals": "image"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Alternative text",
+          "description": "Required. If the browser can't load the image this text will be displayed instead. Also used by \"text-to-speech\" readers.",
+          "name": "descriptionImageAlt",
+          "type": "text",
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "TextOrImage",
+                "equals": "image"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Layout",
+          "name": "layout",
+          "type": "select",
+          "default": "right",
+          "options": [
+            {
+              "label": "Text on right (standard)",
+              "value": "right"
+            },
+            {
+              "label": "Text on left",
+              "value": "left"
+            }
+          ]
+        },
+        {
+          "label": "Media type",
+          "name": "mediaType",
+          "type": "select",
+          "options": [
+            {
+              "label": "Image",
+              "value": "image"
+            },
+            {
+              "label": "Video",
+              "value": "video"
+            },
+            {
+              "label": "Audio",
+              "value": "audio"
+            },
+            {
+              "label": "External link",
+              "value": "custom"
+            },
+            {
+              "label": "None",
+              "value": "none"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "label": "Image",
+          "name": "image",
+          "type": "image",
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "mediaType",
+                "equals": "image"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Alternative text",
+          "description": "Required. If the browser can't load the image this text will be displayed instead. Also used by \"text-to-speech\" readers.",
+          "name": "imageAlt",
+          "type": "text",
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "mediaType",
+                "equals": "image"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Video",
+          "name": "video",
+          "type": "video",
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "mediaType",
+                "equals": "video"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Audio",
+          "name": "audio",
+          "type": "audio",
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "mediaType",
+                "equals": "audio"
+              }
+            ]
+          }
+        },
+        {
+          "label": "External link",
+          "description": "Insert a link to external resources. Certain websites will be rendered as specialized embeds, such as Twitter, YouTube, Wikipedia, and Google Maps. See full list in the <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>",
+          "name": "customMedia",
+          "type": "text",
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "mediaType",
+                "equals": "custom"
+              }
+            ]
+          }
+        },
+        {
+          "name": "info",
+          "label": "Information",
+          "importance": "high",
+          "type": "group",
+          "expanded": false,
+          "fields": [
+            {
+              "name": "credit",
+              "type": "text",
+              "label": "Credit",
+              "importance": "low",
+              "description": "Credits to the media",
+              "optional": true,
+              "widget": "html",
+              "tags": [
+                "a",
+                "strong",
+                "em"
+              ]
+            },
+            {
+              "name": "caption",
+              "type": "text",
+              "label": "Caption",
+              "importance": "low",
+              "description": "Caption text",
+              "optional": true,
+              "widget": "html",
+              "tags": [
+                "a",
+                "strong",
+                "em"
+              ]
+            }
+          ],
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "mediaType",
+                "equals": [
+                  "image",
+                  "audio",
+                  "video",
+                  "custom"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "label": "Tags",
+          "name": "tags",
+          "type": "list",
+          "entity": "Tag",
+          "importance": "low",
+          "optional": true,
+          "min": 0,
+          "widget": "NDLATagsPicker",
+          "fieldNameToWatch": "tags",
+          "field": {
+            "label": "Tag",
+            "name": "tag",
+            "importance": "low",
+            "type": "group",
+            "fields": [
+              {
+                "label": "Id",
+                "name": "id",
+                "type": "text",
+                "widget": "uuid"
+              },
+              {
+                "label": "Name",
+                "name": "name",
+                "type": "text"
+              },
+              {
+                "label": "Color",
+                "name": "color",
+                "type": "text"
+              },
+              {
+                "label": "Is active",
+                "name": "isActive",
+                "type": "text"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Appearance",
+          "name": "appearance",
+          "type": "group",
+          "importance": "low",
+          "fields": [
+            {
+              "label": "Background",
+              "name": "backgroundType",
+              "type": "select",
+              "default": "none",
+              "options": [
+                {
+                  "label": "Color",
+                  "value": "color"
+                },
+                {
+                  "label": "Image",
+                  "value": "image"
+                },
+                {
+                  "label": "None",
+                  "value": "none"
+                }
+              ]
+            },
+            {
+              "label": "Background color",
+              "name": "backgroundColor",
+              "type": "text",
+              "widget": "showWhen",
+              "showWhen": {
+                "rules": [
+                  {
+                    "field": "backgroundType",
+                    "equals": "color"
+                  }
+                ],
+                "widget": "colorSelector"
+              },
+              "default": "#757575",
+              "spectrum": {
+                "showPalette": true,
+                "showPaletteOnly": true,
+                "palette": [
+                  [
+                    "#757575",
+                    "#cd2026",
+                    "#B45918",
+                    "#3D854D",
+                    "#1d5cff",
+                    "#2869B8",
+                    "#057CB3",
+                    "#674ea7",
+                    "#a64d79"
+                  ],
+                  [
+                    "#5c5c5c",
+                    "#B01C21",
+                    "#8b4513",
+                    "#337040",
+                    "#003ACC",
+                    "#205493",
+                    "#04608B",
+                    "#56418B",
+                    "#8C4066"
+                  ],
+                  [
+                    "#2e2e2e",
+                    "#8D161A",
+                    "#6C350F",
+                    "#275430",
+                    "#002EA3",
+                    "#1A4375",
+                    "#034563",
+                    "#351c75",
+                    "#741b47"
+                  ],
+                  [
+                    "#000000",
+                    "#6A1114",
+                    "#48240A",
+                    "#1A3820",
+                    "#00237A",
+                    "#123054",
+                    "#02293B",
+                    "#20124d",
+                    "#4c1130"
+                  ]
+                ]
+              }
+            },
+            {
+              "label": "Background image",
+              "name": "backgroundImage",
+              "type": "image",
+              "widget": "showWhen",
+              "showWhen": {
+                "rules": [
+                  {
+                    "field": "backgroundType",
+                    "equals": "image"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "Tags",
+    "name": "tags",
+    "type": "group",
+    "expanded": false,
+    "importance": "low",
+    "fields": [
+      {
+        "label": "Tags",
+        "name": "tags",
+        "type": "list",
+        "min": 0,
+        "entity": "Tag",
+        "importance": "low",
+        "optional": true,
+        "field": {
+          "label": "Tag",
+          "name": "tag",
+          "importance": "low",
+          "type": "group",
+          "fields": [
+            {
+              "label": "Id",
+              "name": "id",
+              "type": "text",
+              "widget": "uuid"
+            },
+            {
+              "label": "Name",
+              "name": "name",
+              "type": "text"
+            },
+            {
+              "label": "Color",
+              "name": "color",
+              "type": "text",
+              "widget": "colorSelector",
+              "default": "#E0E0E0",
+              "spectrum": {
+                "showPalette": true,
+                "showPaletteOnly": true,
+                "palette": [
+                  [
+                    "#E0E0E0",
+                    "#F9DCDD",
+                    "#F8DDC9",
+                    "#FFF2D6",
+                    "#D5ECDA",
+                    "#EBF0FF",
+                    "#DEEAF7",
+                    "#C3EBFD",
+                    "#E8E3F2",
+                    "#F2E3EB"
+                  ],
+                  [
+                    "#CCCCCC",
+                    "#F1A7A9",
+                    "#EEAF81",
+                    "#FFE5AE",
+                    "#9DD2A9",
+                    "#C2D3FF",
+                    "#9BBEE9",
+                    "#60CAFB",
+                    "#C4BADE",
+                    "#DFB9CC"
+                  ],
+                  [
+                    "#A3A3A3",
+                    "#E66065",
+                    "#E4813A",
+                    "#FED172",
+                    "#65B877",
+                    "#7099FF",
+                    "#5892DA",
+                    "#10AFF9",
+                    "#9582C4",
+                    "#C581A3"
+                  ],
+                  [
+                    "#757575",
+                    "#cd2026",
+                    "#B45918",
+                    "#F2A602",
+                    "#3D854D",
+                    "#1d5cff",
+                    "#2869B8",
+                    "#057CB3",
+                    "#674ea7",
+                    "#a64d79"
+                  ],
+                  [
+                    "#2e2e2e",
+                    "#8D161A",
+                    "#6C350F",
+                    "#A26F02",
+                    "#275430",
+                    "#002EA3",
+                    "#1A4375",
+                    "#034563",
+                    "#351c75",
+                    "#741b47"
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "label": "Eras",
+    "name": "eras",
+    "type": "group",
+    "expanded": false,
+    "importance": "low",
+    "fields": [
+      {
+        "label": "Eras",
+        "name": "eras",
+        "type": "list",
+        "entity": "Era",
+        "importance": "low",
+        "optional": true,
+        "min": 0,
+        "field": {
+          "label": "Era",
+          "name": "era",
+          "importance": "low",
+          "type": "group",
+          "fields": [
+            {
+              "label": "Name",
+              "name": "name",
+              "type": "text"
+            },
+            {
+              "label": "Start date",
+              "description": "YYYY-MM-DD — only year is required. Years can be negative.",
+              "name": "startDate",
+              "type": "text",
+              "regexp": {
+                "pattern": "^(-?)\\d{1,}(-(1[012]|[0]?[1-9])(-([12][0-9]|3[01]|[0]?[1-9]))?)?$"
+              }
+            },
+            {
+              "label": "End date",
+              "description": "YYYY-MM-DD — only year is required. Years can be negative.",
+              "name": "endDate",
+              "type": "text",
+              "regexp": {
+                "pattern": "^(-?)\\d{1,}(-(1[012]|[0]?[1-9])(-([12][0-9]|3[01]|[0]?[1-9]))?)?$"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "behaviour",
+    "type": "group",
+    "label": "Behavioral settings",
+    "importance": "low",
+    "fields": [
+      {
+        "label": "unused",
+        "name": "unused",
+        "type": "boolean",
+        "widget": "none"
+      },
+      {
+        "label": "Scaling mode",
+        "description": "Choose between scaling modes. \"Human time\" shows date in years before and after the Common Era using regular notation, while \"Cosmological time\" shows dates using scientific notation. \"Indexed\" is useful when you want to skew timeframes and make all events seem equally far apart.",
+        "type": "select",
+        "name": "scalingMode",
+        "options": [
+          {
+            "label": "Human time",
+            "value": "human"
+          },
+          {
+            "label": "Cosmological time",
+            "value": "cosmological"
+          },
+          {
+            "label": "Indexed",
+            "value": "index"
+          }
+        ],
+        "default": "human"
+      },
+      {
+        "label": "Initial Zoom",
+        "name": "initialZoom",
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "default": 2,
+        "description": "This will tweak the initial zoom level (2). Equivalent to pressing the zoom in or zoom out button the specified number of times. Values 0 and 1 will zoom out; values 3 to 10 will zoom in.",
+        "optional": true
+      },
+      {
+        "label": "Timeline navigation position",
+        "name": "timenavPosition",
+        "description": "Select the position of the Timeline navigation.",
+        "type": "select",
+        "default": "bottom",
+        "options": [
+          {
+            "label": "bottom",
+            "value": "bottom"
+          },
+          {
+            "label": "top",
+            "value": "top"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "language",
+    "type": "select",
+    "label": "Language",
+    "importance": "medium",
+    "optional": true,
+    "description": "The language of the user interface",
+    "options": [
+      {
+        "value": "af",
+        "label": "Afrikaans"
+      },
+      {
+        "value": "ar",
+        "label": "Arabic"
+      },
+      {
+        "value": "hy",
+        "label": "Armenian"
+      },
+      {
+        "value": "eu",
+        "label": "Basque"
+      },
+      {
+        "value": "bg",
+        "label": "Bulgarian"
+      },
+      {
+        "value": "ca",
+        "label": "Catalan"
+      },
+      {
+        "value": "zh-cn",
+        "label": "Chinese"
+      },
+      {
+        "value": "hr",
+        "label": "Croatian / Hrvatski"
+      },
+      {
+        "value": "cz",
+        "label": "Czech"
+      },
+      {
+        "value": "da",
+        "label": "Danish"
+      },
+      {
+        "value": "nl",
+        "label": "Dutch"
+      },
+      {
+        "value": "en",
+        "label": "English"
+      },
+      {
+        "value": "en-24hr",
+        "label": "English (24-hour time)"
+      },
+      {
+        "value": "eo",
+        "label": "Esperanto"
+      },
+      {
+        "value": "et",
+        "label": "Estonian"
+      },
+      {
+        "value": "fo",
+        "label": "Faroese"
+      },
+      {
+        "value": "fa",
+        "label": "Farsi"
+      },
+      {
+        "value": "fi",
+        "label": "Finnish"
+      },
+      {
+        "value": "fr",
+        "label": "French"
+      },
+      {
+        "value": "gl",
+        "label": "Galician"
+      },
+      {
+        "value": "ka",
+        "label": "Georgian"
+      },
+      {
+        "value": "de",
+        "label": "German / Deutsch"
+      },
+      {
+        "value": "el",
+        "label": "Greek"
+      },
+      {
+        "value": "he",
+        "label": "Hebrew"
+      },
+      {
+        "value": "hu",
+        "label": "Hungarian"
+      },
+      {
+        "value": "is",
+        "label": "Icelandic"
+      },
+      {
+        "value": "id",
+        "label": "Indonesian"
+      },
+      {
+        "value": "it",
+        "label": "Italian"
+      },
+      {
+        "value": "ja",
+        "label": "Japanese"
+      },
+      {
+        "value": "ko",
+        "label": "Korean"
+      },
+      {
+        "value": "lv",
+        "label": "Latvian"
+      },
+      {
+        "value": "lt",
+        "label": "Lithuanian"
+      },
+      {
+        "value": "lb",
+        "label": "Luxembourgish"
+      },
+      {
+        "value": "ms",
+        "label": "Malay"
+      },
+      {
+        "value": "ne",
+        "label": "Nepali"
+      },
+      {
+        "value": "no",
+        "label": "Norwegian"
+      },
+      {
+        "value": "pl",
+        "label": "Polish"
+      },
+      {
+        "value": "pt",
+        "label": "Portuguese"
+      },
+      {
+        "value": "pt-br",
+        "label": "Portuguese (Brazilian)"
+      },
+      {
+        "value": "rm",
+        "label": "Romansh"
+      },
+      {
+        "value": "ru",
+        "label": "Russian"
+      },
+      {
+        "value": "sr-cy",
+        "label": "Serbian - Cyrillic"
+      },
+      {
+        "value": "sr",
+        "label": "Serbian - Latin"
+      },
+      {
+        "value": "si",
+        "label": "Sinhalese"
+      },
+      {
+        "value": "sk",
+        "label": "Slovak"
+      },
+      {
+        "value": "sl",
+        "label": "Slovenian"
+      },
+      {
+        "value": "es",
+        "label": "Spanish"
+      },
+      {
+        "value": "sv",
+        "label": "Swedish"
+      },
+      {
+        "value": "tl",
+        "label": "Tagalog"
+      },
+      {
+        "value": "ta",
+        "label": "Tamil"
+      },
+      {
+        "value": "zh-tw",
+        "label": "Taiwanese"
+      },
+      {
+        "value": "te",
+        "label": "Telugu"
+      },
+      {
+        "value": "tr",
+        "label": "Turkish"
+      },
+      {
+        "value": "uk",
+        "label": "Ukrainian"
+      }
+    ],
+    "default": "en"
+  }
+]

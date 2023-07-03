@@ -1,0 +1,534 @@
+{
+  "semantics": [
+    {
+      "label": "Mostrar página del título"
+    },
+    {
+      "label": "Página del título",
+      "fields": [
+        {
+          "label": "Tipo de página",
+          "default": "título"
+        },
+        {
+          "label": "Título"
+        },
+        {
+          "label": "Fecha de inicio",
+          "description": "YYYY-MM-DD — solamente es necesario el año. Los años pueden ser negativos."
+        },
+        {
+          "label": "Fecha de término",
+          "description": "YYYY-MM-DD — solamente el año es necesario. Los años pueden ser negativos."
+        },
+        {
+          "label": "Descripción"
+        },
+        {
+          "label": "Diseño",
+          "options": [
+            {
+              "label": "Texto a la derecha (estándar)"
+            },
+            {
+              "label": "Texto a la izquierda"
+            }
+          ]
+        },
+        {
+          "label": "Tipo de medio",
+          "options": [
+            {
+              "label": "Imagen"
+            },
+            {
+              "label": "Vídeo"
+            },
+            {
+              "label": "Audio"
+            },
+            {
+              "label": "Enlace externo"
+            },
+            {
+              "label": "Ninguno"
+            }
+          ]
+        },
+        {
+          "label": "Imagen"
+        },
+        {
+          "label": "Texto alterno",
+          "description": "Requerido. Si el navegador no puede cargar la imagen, este texto se mostrará en su lugar. También usado por lectores de \"texto-a-voz\"."
+        },
+        {
+          "label": "Vídeo"
+        },
+        {
+          "label": "Audio"
+        },
+        {
+          "label": "Enlace externo",
+          "description": "Insertar un enlace a recursos externos. Ciertos sitios web serán renderizados como emblemas especializado, como por ejemplo Twitter, YouTube, Wikipedia, y Google Maps. Vea la lista completa en los <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>"
+        },
+        {
+          "label": "Apariencia",
+          "fields": [
+            {
+              "label": "Fondo",
+              "description": "Credits to the media"
+            },
+            {
+              "label": "Color del fondo",
+              "description": "Caption text"
+            },
+            {
+              "label": "Imagen del fondo"
+            }
+          ]
+        },
+        {
+          "label": "Appearance",
+          "fields": [
+            {
+              "label": "Background",
+              "options": [
+                {
+                  "label": "Color"
+                },
+                {
+                  "label": "Image"
+                },
+                {
+                  "label": "None"
+                }
+              ]
+            },
+            {
+              "label": "Background color",
+              "default": "#757575"
+            },
+            {
+              "label": "Background image"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Elementos de línea de tiempo",
+      "entity": "Elemento de línea de tiempo",
+      "widgets": [
+        {
+          "label": "Predeterminado"
+        }
+      ],
+      "field": {
+        "label": "Elemento",
+        "fields": [
+          {
+            "label": "Tipo de página",
+            "default": "regular"
+          },
+          {
+            "label": "Título"
+          },
+          {
+            "label": "Fecha de inicio",
+            "description": "YYYY-MM-DD — solamente el año es requerido. Los años pueden ser negativos."
+          },
+          {
+            "label": "Fecha de término",
+            "description": "YYYY-MM-DD — solamente el año es requerido. Los años pueden ser negativos."
+          },
+          {
+            "label": "Descripción",
+            "options": [
+              {
+                "label": "Text"
+              },
+              {
+                "label": "Image"
+              }
+            ]
+          },
+          {
+            "label": "Diseño"
+          },
+          {
+            "label": "Tipo de medio"
+          },
+          {
+            "label": "Imagen",
+            "description": "Required. If the browser can't load the image this text will be displayed instead. Also used by \"text-to-speech\" readers."
+          },
+          {
+            "label": "Texto alterno",
+            "options": [
+              {
+                "label": "Text on right (standard)"
+              },
+              {
+                "label": "Text on left"
+              }
+            ]
+          },
+          {
+            "label": "Vídeo",
+            "options": [
+              {
+                "label": "Image"
+              },
+              {
+                "label": "Video"
+              },
+              {
+                "label": "Audio"
+              },
+              {
+                "label": "External link"
+              },
+              {
+                "label": "None"
+              }
+            ]
+          },
+          {
+            "label": "Audio"
+          },
+          {
+            "label": "Enlace externo",
+            "description": "Insertar un enlace a recursos externos. Ciertos sitios web serán renderizados como símbolos especializados, como por ejemplo Twitter, YouTube, Wikipedia, y Google Maps. Vea la lista completa en los <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>"
+          },
+          {
+            "label": "Marcas"
+          },
+          {
+            "label": "Apariencia"
+          },
+          {
+            "label": "External link",
+            "description": "Insert a link to external resources. Certain websites will be rendered as specialized embeds, such as Twitter, YouTube, Wikipedia, and Google Maps. See full list in the <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>"
+          },
+          {
+            "label": "Information",
+            "fields": [
+              {
+                "label": "Credit",
+                "description": "Credits to the media"
+              },
+              {
+                "label": "Caption",
+                "description": "Caption text"
+              }
+            ]
+          },
+          {
+            "label": "Tags",
+            "entity": "Tag",
+            "field": {
+              "label": "Tag",
+              "fields": [
+                {
+                  "label": "Id"
+                },
+                {
+                  "label": "Name"
+                },
+                {
+                  "label": "Color"
+                },
+                {
+                  "label": "Is active"
+                }
+              ]
+            }
+          },
+          {
+            "label": "Appearance",
+            "fields": [
+              {
+                "label": "Background",
+                "options": [
+                  {
+                    "label": "Color"
+                  },
+                  {
+                    "label": "Image"
+                  },
+                  {
+                    "label": "None"
+                  }
+                ]
+              },
+              {
+                "label": "Background color",
+                "default": "#757575"
+              },
+              {
+                "label": "Background image"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Marcas",
+      "fields": [
+        {
+          "label": "Marcas",
+          "entity": "Marca",
+          "field": {
+            "label": "Marca",
+            "fields": [
+              {
+                "label": "Id"
+              },
+              {
+                "label": "Nombre"
+              },
+              {
+                "label": "Color",
+                "default": "#E0E0E0"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Eras",
+      "fields": [
+        {
+          "label": "Eras",
+          "entity": "Era",
+          "field": {
+            "label": "Era",
+            "fields": [
+              {
+                "label": "Nombre"
+              },
+              {
+                "label": "Fecha de inicio",
+                "description": "YYYY-MM-DD — solo el año es requerido. Los años pueden ser negativos."
+              },
+              {
+                "label": "Fecha de término",
+                "description": "YYYY-MM-DD — solo el año es requerido. Los años pueden ser negativos."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Configuraciones del comportamiento",
+      "fields": [
+        {
+          "label": "unused"
+        },
+        {
+          "label": "Modo de escala",
+          "description": "Elegir entre modos de escala. \"Hora humana\" muestra la fecha en años antes y después de la Era común usando notación regular, mientras que \"Hora cosmológica\" muestra las fechas usando notación científica. \"Indexado\" es útil cuando usted quiere separar marcos temporales y hacer que los eventos se vean igualmente distanciados.",
+          "options": [
+            {
+              "label": "Hora humana"
+            },
+            {
+              "label": "Hora cosmológica"
+            },
+            {
+              "label": "Indexado"
+            }
+          ]
+        },
+        {
+          "label": "Initial Zoom",
+          "description": "This will tweak the initial zoom level (2). Equivalent to pressing the zoom in or zoom out button the specified number of times. Values 0 and 1 will zoom out; values 3 to 10 will zoom in."
+        },
+        {
+          "label": "Timeline navigation position",
+          "description": "Select the position of the Timeline navigation.",
+          "options": [
+            {
+              "label": "bottom"
+            },
+            {
+              "label": "top"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Adaptación local",
+      "description": "The language of the user interface",
+      "options": [
+        {
+          "label": "Afrikaans"
+        },
+        {
+          "label": "Arabic"
+        },
+        {
+          "label": "Armenian"
+        },
+        {
+          "label": "Basque"
+        },
+        {
+          "label": "Bulgarian"
+        },
+        {
+          "label": "Catalan"
+        },
+        {
+          "label": "Chinese"
+        },
+        {
+          "label": "Croatian / Hrvatski"
+        },
+        {
+          "label": "Czech"
+        },
+        {
+          "label": "Danish"
+        },
+        {
+          "label": "Dutch"
+        },
+        {
+          "label": "English"
+        },
+        {
+          "label": "English (24-hour time)"
+        },
+        {
+          "label": "Esperanto"
+        },
+        {
+          "label": "Estonian"
+        },
+        {
+          "label": "Faroese"
+        },
+        {
+          "label": "Farsi"
+        },
+        {
+          "label": "Finnish"
+        },
+        {
+          "label": "French"
+        },
+        {
+          "label": "Galician"
+        },
+        {
+          "label": "Georgian"
+        },
+        {
+          "label": "German / Deutsch"
+        },
+        {
+          "label": "Greek"
+        },
+        {
+          "label": "Hebrew"
+        },
+        {
+          "label": "Hungarian"
+        },
+        {
+          "label": "Icelandic"
+        },
+        {
+          "label": "Indonesian"
+        },
+        {
+          "label": "Italian"
+        },
+        {
+          "label": "Japanese"
+        },
+        {
+          "label": "Korean"
+        },
+        {
+          "label": "Latvian"
+        },
+        {
+          "label": "Lithuanian"
+        },
+        {
+          "label": "Luxembourgish"
+        },
+        {
+          "label": "Malay"
+        },
+        {
+          "label": "Nepali"
+        },
+        {
+          "label": "Norwegian"
+        },
+        {
+          "label": "Polish"
+        },
+        {
+          "label": "Portuguese"
+        },
+        {
+          "label": "Portuguese (Brazilian)"
+        },
+        {
+          "label": "Romansh"
+        },
+        {
+          "label": "Russian"
+        },
+        {
+          "label": "Serbian - Cyrillic"
+        },
+        {
+          "label": "Serbian - Latin"
+        },
+        {
+          "label": "Sinhalese"
+        },
+        {
+          "label": "Slovak"
+        },
+        {
+          "label": "Slovenian"
+        },
+        {
+          "label": "Spanish"
+        },
+        {
+          "label": "Swedish"
+        },
+        {
+          "label": "Tagalog"
+        },
+        {
+          "label": "Tamil"
+        },
+        {
+          "label": "Taiwanese"
+        },
+        {
+          "label": "Telugu"
+        },
+        {
+          "label": "Turkish"
+        },
+        {
+          "label": "Ukrainian"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,531 @@
+{
+  "semantics": [
+    {
+      "label": "Afficher la diapositive de titre"
+    },
+    {
+      "label": "Diapositive du titre",
+      "fields": [
+        {
+          "label": "Type de diapositive",
+          "default": "titre"
+        },
+        {
+          "label": "Titre"
+        },
+        {
+          "label": "Date de début",
+          "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
+        },
+        {
+          "label": "Date de fin",
+          "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
+        },
+        {
+          "label": "Description"
+        },
+        {
+          "label": "Mise en page",
+          "options": [
+            {
+              "label": "Texte à droite (standard)"
+            },
+            {
+              "label": "Texte à gauche"
+            }
+          ]
+        },
+        {
+          "label": "Type de média",
+          "options": [
+            {
+              "label": "Image"
+            },
+            {
+              "label": "Vidéo"
+            },
+            {
+              "label": "Audio"
+            },
+            {
+              "label": "Lien externe"
+            },
+            {
+              "label": "Aucun"
+            }
+          ]
+        },
+        {
+          "label": "Image d'arrière-plan"
+        },
+        {
+          "label": "Texte alternatif",
+          "description": "Requis. Si le navigateur ne peut pas charger l&#39;image, ce texte sera affiché à la place. Également utilisé par les lecteurs &quot;text-to-speech&quot;."
+        },
+        {
+          "label": "Vidéo"
+        },
+        {
+          "label": "Audio"
+        },
+        {
+          "label": "Lien externe",
+          "description": "Insérer un lien vers des ressources externes. Certains sites Web seront rendus sous forme d&#39;intégrations spécialisées, telles que Twitter, YouTube, Wikipedia et Google Maps. Voir la liste complète dans la <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Documentation Knightlab</a>"
+        },
+        {
+          "label": "Information",
+          "fields": [
+            {
+              "label": "Crédits",
+              "description": "Crédits pour les médias"
+            },
+            {
+              "label": "Légende",
+              "description": "Texte de la légende"
+            }
+          ]
+        },
+        {
+          "label": "Apparence",
+          "fields": [
+            {
+              "label": "Arrière-plan",
+              "options": [
+                {
+                  "label": "Couleur"
+                },
+                {
+                  "label": "Image"
+                },
+                {
+                  "label": "Aucun"
+                }
+              ]
+            },
+            {
+              "label": "Couleur d'arrière-plan",
+              "default": "#757575"
+            },
+            {
+              "label": "Image d'arrière-plan'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Éléments de la chronologie",
+      "entity": "Élément de chronologie",
+      "widgets": [
+        {
+          "label": "Par défaut"
+        }
+      ],
+      "field": {
+        "label": "Item",
+        "fields": [
+          {
+            "label": "Type de diapositive",
+            "default": "régulier"
+          },
+          {
+            "label": "Titre"
+          },
+          {
+            "label": "Date de début",
+            "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
+          },
+          {
+            "label": "Date de fin",
+            "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
+          },
+          {
+            "label": "Description",
+            "options": [
+              {
+                "label": "Text"
+              },
+              {
+                "label": "Image"
+              }
+            ]
+          },
+          {
+            "label": "Mise en page"
+          },
+          {
+            "label": "Type de média"
+          },
+          {
+            "label": "Image",
+            "description": "Required. If the browser can't load the image this text will be displayed instead. Also used by \"text-to-speech\" readers."
+          },
+          {
+            "label": "Texte alternatif",
+            "options": [
+              {
+                "label": "Text on right (standard)"
+              },
+              {
+                "label": "Text on left"
+              }
+            ]
+          },
+          {
+            "label": "Vidéo",
+            "options": [
+              {
+                "label": "Image"
+              },
+              {
+                "label": "Video"
+              },
+              {
+                "label": "Audio"
+              },
+              {
+                "label": "External link"
+              },
+              {
+                "label": "None"
+              }
+            ]
+          },
+          {
+            "label": "Audio"
+          },
+          {
+            "label": "Lien externe",
+            "description": "Insérer un lien vers des ressources externes. Certains sites Web seront rendus sous forme d&#39;intégrations spécialisées, telles que Twitter, YouTube, Wikipedia et Google Maps. Voir la liste complète dans la <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Documentation Knightlab</a>"
+          },
+          {
+            "label": "Information"
+          },
+          {
+            "label": "Étiquettes"
+          },
+          {
+            "label": "Apparence",
+            "description": "Insert a link to external resources. Certain websites will be rendered as specialized embeds, such as Twitter, YouTube, Wikipedia, and Google Maps. See full list in the <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>"
+          },
+          {
+            "label": "Information",
+            "fields": [
+              {
+                "label": "Credit",
+                "description": "Credits to the media"
+              },
+              {
+                "label": "Caption",
+                "description": "Caption text"
+              }
+            ]
+          },
+          {
+            "label": "Tags",
+            "entity": "Tag",
+            "field": {
+              "label": "Tag",
+              "fields": [
+                {
+                  "label": "Id"
+                },
+                {
+                  "label": "Name"
+                },
+                {
+                  "label": "Color"
+                },
+                {
+                  "label": "Is active"
+                }
+              ]
+            }
+          },
+          {
+            "label": "Appearance",
+            "fields": [
+              {
+                "label": "Background",
+                "options": [
+                  {
+                    "label": "Color"
+                  },
+                  {
+                    "label": "Image"
+                  },
+                  {
+                    "label": "None"
+                  }
+                ]
+              },
+              {
+                "label": "Background color",
+                "default": "#757575"
+              },
+              {
+                "label": "Background image"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Étiquettes",
+      "fields": [
+        {
+          "label": "Étiquettes",
+          "entity": "Étiquette",
+          "field": {
+            "label": "Étiquette",
+            "fields": [
+              {
+                "label": "Id"
+              },
+              {
+                "label": "Nom"
+              },
+              {
+                "label": "Couleur",
+                "default": "#E0E0E0"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Périodes",
+      "fields": [
+        {
+          "label": "Périodes",
+          "entity": "Période",
+          "field": {
+            "label": "Période",
+            "fields": [
+              {
+                "label": "Nom"
+              },
+              {
+                "label": "Date de début",
+                "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
+              },
+              {
+                "label": "Date de fin",
+                "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Options générales",
+      "fields": [
+        {
+          "label": "inutilisé"
+        },
+        {
+          "label": "Mode de mise à l&#39;échelle",
+          "description": "Choisissez entre les modes de mise à l&#39;échelle. &quot;Le temps humain&quot; montre la date en années avant et après l&#39;ère commune en utilisant la notation régulière, tandis que le &quot;temps cosmologique&quot; montre les dates en utilisant la notation scientifique. &quot;Indexé&quot; est utile lorsque vous souhaitez biaiser les intervalles et faire en sorte que tous les événements semblent également éloignés les uns des autres.",
+          "options": [
+            {
+              "label": "Temps humain"
+            },
+            {
+              "label": "Temps cosmologique"
+            },
+            {
+              "label": "Indexé"
+            }
+          ]
+        },
+        {
+          "label": "Zoom initial",
+          "description": "Cela permet de modifier le niveau de zoom initial (2). Cela équivaut à appuyer sur le bouton 'zoom avant' ou 'zoom arrière' le nombre de fois spécifié. Les valeurs 0 et 1 permettent d'effectuer un zoom arrière ; les valeurs 3 à 10 permettent d'effectuer un zoom avant."
+        },
+        {
+          "label": "Position de la navigation dans la frise chronologique",
+          "description": "Sélectionnez la position de la navigation dans la chronologie.",
+          "options": [
+            {
+              "label": "sous la frise"
+            },
+            {
+              "label": "au-dessus de la frise"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Langue",
+      "description": "Choisissez la langue de l'interface",
+      "options": [
+        {
+          "label": "Afrikaans"
+        },
+        {
+          "label": "Arabe"
+        },
+        {
+          "label": "Arménien"
+        },
+        {
+          "label": "Basque"
+        },
+        {
+          "label": "Bulgare"
+        },
+        {
+          "label": "Catalan"
+        },
+        {
+          "label": "Chinois"
+        },
+        {
+          "label": "Croate/ Hrvatski"
+        },
+        {
+          "label": "Tchèque"
+        },
+        {
+          "label": "Danois"
+        },
+        {
+          "label": "Allemand"
+        },
+        {
+          "label": "Anglais"
+        },
+        {
+          "label": "Anglais (24 heures)"
+        },
+        {
+          "label": "Esperanto"
+        },
+        {
+          "label": "Estonien"
+        },
+        {
+          "label": "Faroese"
+        },
+        {
+          "label": "Farsi"
+        },
+        {
+          "label": "Finnois"
+        },
+        {
+          "label": "Français"
+        },
+        {
+          "label": "Galicien"
+        },
+        {
+          "label": "Géorgien"
+        },
+        {
+          "label": "Allemand / Deutsch"
+        },
+        {
+          "label": "Grec"
+        },
+        {
+          "label": "Hébreu"
+        },
+        {
+          "label": "Hongrois"
+        },
+        {
+          "label": "Islandais"
+        },
+        {
+          "label": "Indonésien"
+        },
+        {
+          "label": "Italien"
+        },
+        {
+          "label": "Japonais"
+        },
+        {
+          "label": "Coréen"
+        },
+        {
+          "label": "Letton"
+        },
+        {
+          "label": "Lituanien"
+        },
+        {
+          "label": "Luxembourgeois"
+        },
+        {
+          "label": "Malay"
+        },
+        {
+          "label": "Nepali"
+        },
+        {
+          "label": "Norvégien"
+        },
+        {
+          "label": "Polonais"
+        },
+        {
+          "label": "Portugais"
+        },
+        {
+          "label": "Portugais (Brésilien)"
+        },
+        {
+          "label": "Roumain"
+        },
+        {
+          "label": "Russe"
+        },
+        {
+          "label": "Serbe - Cyrillic"
+        },
+        {
+          "label": "Serbe - Latin"
+        },
+        {
+          "label": "Cinghalese"
+        },
+        {
+          "label": "Slovaque"
+        },
+        {
+          "label": "Slovène"
+        },
+        {
+          "label": "Espagnol"
+        },
+        {
+          "label": "Suédois"
+        },
+        {
+          "label": "Tagalog"
+        },
+        {
+          "label": "Tamoul"
+        },
+        {
+          "label": "Taiwanais"
+        },
+        {
+          "label": "Telugu"
+        },
+        {
+          "label": "Turc"
+        },
+        {
+          "label": "Ukrainien"
+        }
+      ]
+    }
+  ]
+}
