@@ -48,7 +48,7 @@
       .tl-timemarker-text {
         h2.tl-headline {
           color: #000;
-
+          font-variant-caps: revert;
           p {
             color: #000;
           }
@@ -69,7 +69,7 @@
       .tl-timemarker-text {
         h2.tl-headline {
           color: #fff;
-
+          font-variant-caps: revert;
           p {
             color: #fff;
           }
@@ -162,13 +162,17 @@
   .tl-caption {
     margin-top: 5px;
   }
+
   .tl-slide .tl-slide-content-container .tl-slide-content .tl-media {
     width: 50%;
+    overflow: scroll;
+    max-height: calc( var(--h5p-timeline-slide-height) - 32px );
   }
+
   .tl-timeline h1, .tl-timeline h2, .tl-timeline h3, .tl-timeline h4, .tl-timeline h5, .tl-timeline h6 {
     font-size: revert;
   }
-  
+
 }
 
 /* Local duplicate of default stylesheet by Knightlab, but not using external resources */
@@ -211,7 +215,7 @@
 .tl-timeline h5,
 .tl-timeline h6 {
   font-family: 'PT Sans Narrow', sans-serif;
-  text-transform: uppercase;
+  font-variant-caps: small-caps;
   font-weight: 700;
   font-size: 46px;
   line-height: 46px;
@@ -236,9 +240,9 @@
   font-size: 24px;
   line-height: 24px;
 }
-.tl-timeline .tl-caption,
-.tl-timeline .tl-credit {
-  font-family: 'PT Serif', serif;
+.tl-timeline .tl-media .tl-media-wikipedia p {
+  font-size: 13px!important;
+  line-height: 19px;
 }
 .tl-timeline .vcard {
   font-family: 'PT Sans Narrow', sans-serif !important;
@@ -262,7 +266,7 @@
 .tl-timeline h3.tl-headline-date {
   font-family: 'PT Sans Narrow', sans-serif !important;
   font-weight: normal !important;
-  text-transform: uppercase !important;
+  text-transform: capitalize;
 }
 .tl-timeline .tl-headline-date small,
 .tl-timeline h3.tl-headline-date small {
