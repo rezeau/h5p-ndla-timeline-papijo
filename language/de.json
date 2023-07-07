@@ -76,41 +76,38 @@
           "label": "Darstellung",
           "fields": [
             {
-              "label": "Hintergrund",
+              "label": "Credit",
               "description": "Credits to the media"
             },
             {
-              "label": "Hintergrundfarbe",
+              "label": "Caption",
               "description": "Caption text"
-            },
-            {
-              "label": "Hintergrundbild"
             }
           ]
         },
         {
-          "label": "Appearance",
+          "label": "Darstellung",
           "fields": [
             {
-              "label": "Background",
+              "label": "Hintergrund",
               "options": [
                 {
-                  "label": "Color"
+                  "label": "Farbe"
                 },
                 {
-                  "label": "Image"
+                  "label": "Bild"
                 },
                 {
-                  "label": "None"
+                  "label": "Nichts"
                 }
               ]
             },
             {
-              "label": "Background color",
+              "label": "Hintergrundfarbe",
               "default": "#757575"
             },
             {
-              "label": "Background image"
+              "label": "Hintergrundbild"
             }
           ]
         }

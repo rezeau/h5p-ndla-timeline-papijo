@@ -73,44 +73,41 @@
           "description": "Insertar un enlace a recursos externos. Ciertos sitios web serán renderizados como emblemas especializado, como por ejemplo Twitter, YouTube, Wikipedia, y Google Maps. Vea la lista completa en los <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>"
         },
         {
-          "label": "Apariencia",
+          "label": "Information",
           "fields": [
             {
-              "label": "Fondo",
+              "label": "Credit",
               "description": "Credits to the media"
             },
             {
-              "label": "Color del fondo",
+              "label": "Caption",
               "description": "Caption text"
-            },
-            {
-              "label": "Imagen del fondo"
             }
           ]
         },
         {
-          "label": "Appearance",
+          "label": "Apariencia",
           "fields": [
             {
-              "label": "Background",
+              "label": "Fondo",
               "options": [
                 {
                   "label": "Color"
                 },
                 {
-                  "label": "Image"
+                  "label": "Imagen"
                 },
                 {
-                  "label": "None"
+                  "label": "Ninguno"
                 }
               ]
             },
             {
-              "label": "Background color",
+              "label": "Color del fondo",
               "default": "#757575"
             },
             {
-              "label": "Background image"
+              "label": "Imagen del fondo"
             }
           ]
         }
@@ -143,56 +140,66 @@
             "description": "YYYY-MM-DD — solamente el año es requerido. Los años pueden ser negativos."
           },
           {
-            "label": "Descripción",
+            "label": "¿Texto o imagen?",
             "options": [
               {
-                "label": "Text"
+                "label": "Texto"
               },
               {
-                "label": "Image"
+                "label": "Imagen"
               }
             ]
           },
           {
-            "label": "Diseño"
+            "label": "Descripción"
           },
           {
-            "label": "Tipo de medio"
-          },
-          {
-            "label": "Imagen",
-            "description": "Required. If the browser can't load the image this text will be displayed instead. Also used by \"text-to-speech\" readers."
+            "label": "Imagen descripción"
           },
           {
             "label": "Texto alterno",
+            "description": "Requerido. Si el navegador no puede cargar la imagen este texto será mostrado en su lugar. También usado por lectores de \"texto-a-voz\"."
+          },
+          {
+            "label": "Diseño",
             "options": [
               {
-                "label": "Text on right (standard)"
+                "label": "Texto a la derecha (estándar)"
               },
               {
-                "label": "Text on left"
+                "label": "Texto a la izquierda"
               }
             ]
           },
           {
-            "label": "Vídeo",
+            "label": "Tipo de medio",
             "options": [
               {
-                "label": "Image"
+                "label": "Imagen"
               },
               {
-                "label": "Video"
+                "label": "Vídeo"
               },
               {
                 "label": "Audio"
               },
               {
-                "label": "External link"
+                "label": "Enlace externo"
               },
               {
-                "label": "None"
+                "label": "Ninguno"
               }
             ]
+          },
+          {
+            "label": "Imagen"
+          },
+          {
+            "label": "Texto alterno",
+            "description": "Requerido. Si el navegador no puede cargar la imagen, este texto se mostrará en su lugar. También usado por lectores de \"texto-a-voz\"."
+          },
+          {
+            "label": "Video"
           },
           {
             "label": "Audio"
@@ -200,16 +207,6 @@
           {
             "label": "Enlace externo",
             "description": "Insertar un enlace a recursos externos. Ciertos sitios web serán renderizados como símbolos especializados, como por ejemplo Twitter, YouTube, Wikipedia, y Google Maps. Vea la lista completa en los <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>"
-          },
-          {
-            "label": "Marcas"
-          },
-          {
-            "label": "Apariencia"
-          },
-          {
-            "label": "External link",
-            "description": "Insert a link to external resources. Certain websites will be rendered as specialized embeds, such as Twitter, YouTube, Wikipedia, and Google Maps. See full list in the <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>"
           },
           {
             "label": "Information",
@@ -225,49 +222,49 @@
             ]
           },
           {
-            "label": "Tags",
-            "entity": "Tag",
+            "label": "Marcas",
+            "entity": "Marca",
             "field": {
-              "label": "Tag",
+              "label": "Marca",
               "fields": [
                 {
                   "label": "Id"
                 },
                 {
-                  "label": "Name"
+                  "label": "Nombre"
                 },
                 {
                   "label": "Color"
                 },
                 {
-                  "label": "Is active"
+                  "label": "Está activo"
                 }
               ]
             }
           },
           {
-            "label": "Appearance",
+            "label": "Apariencia",
             "fields": [
               {
-                "label": "Background",
+                "label": "Fondo",
                 "options": [
                   {
                     "label": "Color"
                   },
                   {
-                    "label": "Image"
+                    "label": "Imagen"
                   },
                   {
-                    "label": "None"
+                    "label": "Ninguno"
                   }
                 ]
               },
               {
-                "label": "Background color",
+                "label": "Color del fondo",
                 "default": "#757575"
               },
               {
-                "label": "Background image"
+                "label": "Imagen del fondo"
               }
             ]
           }

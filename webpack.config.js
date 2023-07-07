@@ -97,7 +97,7 @@ module.exports = {
   },
   plugins: [
     new BundleAnalyzerPlugin({
-      analyzerMode: mode !== 'production' ? 'static' : 'disabled',
+      analyzerMode: 'disabled',
       openAnalyzer: false,
     }),
     new MiniCssExtractPlugin()
