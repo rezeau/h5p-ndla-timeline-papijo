@@ -408,6 +408,7 @@
           ]
         },
         {
+          "label": "Description text",
           "name": "description",
           "type": "library",
           "options": [
