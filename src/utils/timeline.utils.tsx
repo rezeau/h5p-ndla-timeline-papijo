@@ -196,7 +196,10 @@ export const mapEventToTimelineSlide = (
     );
   }
 
-  const media = getMedia(event);
+  let media = getMedia(event);
+  if (typeof media === 'string') {
+    media = media.replace(/&lt;/g, '<').replace(/&gt;/g, '>') ;
+  }
   if (media) {
     slide.media = {
       url: typeof media === 'string' ? media : media.path,

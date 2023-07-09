@@ -306,3 +306,19 @@
 .tl-timemarker .tl-timemarker-content-container .tl-timemarker-content{
   padding: 0px!important;
 }
+
+.tl-media {
+  .tl-media-blockquote {
+    text-align:left;
+    clear:both;
+    font-style: italic;
+    blockquote {
+      margin: 0;
+      text-align: left;
+      cite {
+        text-align: right;
+      }
+
+    }
+  }
+}
