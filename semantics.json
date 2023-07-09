@@ -388,7 +388,7 @@
           }
         },
         {
-          "label": "Text Or Image?",
+          "label": "Description type",
           "name": "TextOrImage",
           "type": "select",
           "default": "text",
@@ -400,11 +400,14 @@
             {
               "label": "Image",
               "value": "image"
+            },
+            {
+              "label": "None",
+              "value": "none"
             }
           ]
         },
         {
-          "label": "Description",
           "name": "description",
           "type": "library",
           "options": [
@@ -421,7 +424,7 @@
           }
         },
         {
-          "label": "description Image",
+          "label": "Image",
           "name": "descriptionImage",
           "type": "image",
           "widget": "showWhen",

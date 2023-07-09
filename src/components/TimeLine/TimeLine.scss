@@ -1,10 +1,3 @@
-[id*="layout-left"],
-[id*="layout-right"] {
-  .tl-slide-content {
-    display: flex !important;
-  }
-}
-
 [id*="layout-right"] {
   .tl-media {
     order: 2;
@@ -261,6 +254,7 @@
   }
 }
 
+/*
 .tl-timemarker {
   .tl-timemarker-content-container
     .tl-timemarker-content
@@ -272,7 +266,43 @@
     }
   }
 }
+*/
 /* Adds a little height to labels in the timeline. */
-.tl-timemarker-content-container-small {
+.tl-timemarker-content-container.tl-timemarker-content-container-small {
   height: auto!important;
+}
+
+/* Only Media (no text)
+================================================== */
+.tl-slide-media-only {
+  .tl-slide-content-container {
+    .tl-slide-content {
+      text-align:center;
+      .tl-media {
+        text-align:center;
+        position:relative;
+        width:100%;
+        min-width:50%;
+        max-width:100%;
+        float: none;
+        margin-top:auto;
+        margin-bottom:auto;
+      }
+      .tl-text {
+        width: 100%;
+        max-width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+    }
+  }
+}
+.tl-icon-audio::after {
+  content: "\e63a";
+}
+
+.tl-timemarker .tl-timemarker-content-container .tl-timemarker-content{
+  padding: 0px!important;
 }

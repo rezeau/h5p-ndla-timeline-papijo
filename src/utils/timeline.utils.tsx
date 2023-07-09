@@ -157,17 +157,21 @@ export const mapEventToTimelineSlide = (
       );
     }
     text = tagsMarkup;
-
-    if (event.description && event.TextOrImage !== 'image') {
-      text += html`<div class="h5p-tl-slide-description">
-        ${event.description.params.text ?? ''}
-      </div>`;
+    // Check if event.description.params.text is undefined or not.
+    if (event.TextOrImage !== 'none') {
+      if (event.description && event.TextOrImage === 'text') {
+        text += html`<div class="h5p-tl-slide-description">
+          ${event.description.params.text ?? ''}
+        </div>`;
+      }
+      else if (event.descriptionImage && event.TextOrImage === 'image') {
+        text += html`<img alt="" src="` + event.descriptionImage.path + `" />
+        </div>`;
+      }
     }
-    else if (event.descriptionImage && event.TextOrImage === 'image') {
-      text += html`<img alt="" src="` + event.descriptionImage.path + `" />
-      </div>`;
+    else {
+      text = '';
     }
-
   }
 
   // The `layout-x` part of this ID is used for styling and must not be removed

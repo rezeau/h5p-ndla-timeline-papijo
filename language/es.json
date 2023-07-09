@@ -140,21 +140,21 @@
             "description": "YYYY-MM-DD — solamente el año es requerido. Los años pueden ser negativos."
           },
           {
-            "label": "¿Texto o imagen?",
+            "label": "Tipo de descripción",
             "options": [
               {
                 "label": "Texto"
               },
               {
                 "label": "Imagen"
+              },
+              {
+                "label": "Ninguno"
               }
             ]
           },
           {
-            "label": "Descripción"
-          },
-          {
-            "label": "Imagen descripción"
+            "label": "Imagen"
           },
           {
             "label": "Texto alterno",
@@ -287,8 +287,7 @@
                 "label": "Nombre"
               },
               {
-                "label": "Color",
-                "default": "#E0E0E0"
+                "label": "Color"
               }
             ]
           }

@@ -140,25 +140,21 @@
             "description": "YYYY-MM-DD — only year is required. Years can be negative."
           },
           {
-            "label": "Text Or Image?",
+            "label": "Description type",
             "options": [
               {
                 "label": "Text"
               },
               {
                 "label": "Image"
+              },
+              {
+                "label": "None"
               }
             ]
           },
           {
-            "label": "Description"
-          },
-          {
-            "label": "description Image"
-          },
-          {
-            "label": "Alternative text",
-            "description": "Required. If the browser can't load the image this text will be displayed instead. Also used by \"text-to-speech\" readers."
+            "label": "Image"
           },
           {
             "label": "Layout",
@@ -287,8 +283,7 @@
                 "label": "Name"
               },
               {
-                "label": "Color",
-                "default": "#E0E0E0"
+                "label": "Color"
               }
             ]
           }

@@ -78,6 +78,7 @@
     }
   }
 
+
     .tl-slidenav-title {
     opacity: 0.25;
   }
@@ -161,10 +162,6 @@
 
   .tl-caption {
     margin-top: 5px;
-  }
-
-  .tl-slide .tl-slide-content-container .tl-slide-content .tl-media {
-    width: 50%;
   }
 
   .tl-slide .tl-slide-content-container .tl-slide-content .tl-media .tl-media-content {
@@ -308,4 +305,8 @@ input[type="text"].editor-headline {
 }
 .tl-timeline .tl-timenav-slider .tl-timeaxis {
   font-weight: normal;
+}
+
+.tl-slide .tl-slide-content-container .tl-slide-content .tl-text {
+  vertical-align: top;
 }
