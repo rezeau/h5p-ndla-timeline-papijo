@@ -989,6 +989,30 @@
             "value": "top"
           }
         ]
+      },
+      {
+        "label": "Start at the end",
+        "name": "startatend",
+        "description": "Check this box if you want this timeline to be displayed at the last slide.",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "label": "Default start slide",
+        "name": "startatslide",
+        "type": "number",
+        "description": "Start this timeline at a specific slide number. If the number you type exceeds the number of slides, your timeline will start at the last slide.",
+        "min": 1,
+        "default": 1,
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "startatend",
+              "equals": false
+            }
+          ]
+        }
       }
     ]
   },

@@ -45,8 +45,16 @@ export const TimeLine: React.FC<TimeLineProps> = ({
   }
   // See https://stackoverflow.com/questions/54496398/typescript-type-string-undefined-is-not-assignable-to-type-string
   let zoom = (!data.behaviour.initialZoom ? '2' : data.behaviour.initialZoom as string);
-  zoom = zoom.toString();
   let timenavPosition =  (!data.behaviour.timenavPosition ? '2' : data.behaviour.timenavPosition as string);
+  let startatend =  data.behaviour.startatend;
+  let startatslide = (data.behaviour.startatend ? '0' : data.behaviour.startatslide);
+  // We need to substract 1 from the startatslide number string because slides are numbered from 0.
+  // So we need various conversions from string to number and back from number to string.
+  startatslide = Number(startatslide).toString();
+  const numericValue = parseInt(startatslide);
+  const result = numericValue - 1;
+  const startatslidenb = result.toString();
+  
   const [height, setHeight] = useState(0);
   const [slideWidth, setSlideWidth] = useState(0);
   const [slideHeight, setSlideHeight] = useState(0);
@@ -105,6 +113,8 @@ export const TimeLine: React.FC<TimeLineProps> = ({
       initial_zoom: zoom,
       timenav_position: timenavPosition,
       font: undefined,
+      start_at_slide: startatslidenb,
+      start_at_end: startatend,
     });
 
     const timelineContainer = containerRef.current?.querySelector(
@@ -336,4 +346,5 @@ export const TimeLine: React.FC<TimeLineProps> = ({
       <div id={containerId} />
     </div>
   );
+
 };

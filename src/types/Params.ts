@@ -6,6 +6,8 @@ export type Params = TimelineData & {
     scalingMode: 'human' | 'cosmological' | 'index';
     initialZoom?: string | undefined;
     timenavPosition?: string | undefined;
+    startatend?: boolean | undefined;
+    startatslide?: string;
   };
 
   l10n?: Translations;
