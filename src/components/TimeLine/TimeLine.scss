@@ -272,33 +272,12 @@
   height: auto!important;
 }
 
-/* Only Media (no text)
-================================================== */
-.tl-slide-media-only {
-  .tl-slide-content-container {
-    .tl-slide-content {
-      text-align:center;
-      .tl-media {
-        text-align:center;
-        position:relative;
-        width:100%;
-        min-width:50%;
-        max-width:100%;
-        float: none;
-        margin-top:auto;
-        margin-bottom:auto;
-      }
-      .tl-text {
-        width: 100%;
-        max-width: 100%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-      }
-    }
+.tl-slide-text-only {
+	.tl-text-headline-container {
+    text-align: center;
   }
 }
+
 .tl-icon-audio::after {
   content: "\e63a";
 }
@@ -311,14 +290,26 @@
   .tl-media-blockquote {
     text-align:left;
     clear:both;
-    font-style: italic;
+    font-style: normal!important;
+    width: 100%!important;
+    margin-top: 2em;    
     blockquote {
-      margin: 0;
+      font-size: 1.4em!important;
+      margin-left: 1em;
       text-align: left;
       cite {
         text-align: right;
       }
-
     }
+  }
+  .tl-media-blockquote:after {
+    display: block;
+    content: "\201C";
+    font-family: georgia,Arial,Verdana;
+    font-weight: 700;
+    color: lightgray;
+    font-size: 5em;
+    position: absolute;
+    top: 0.3em;
   }
 }

@@ -19,5 +19,9 @@ export type MediaType =
       customMedia?: string;
     }
   | {
+      mediaType: 'quote';
+      customQuote?: any;
+    }  
+  | {
       mediaType: 'none';
     };

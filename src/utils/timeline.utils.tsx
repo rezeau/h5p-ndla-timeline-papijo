@@ -84,7 +84,7 @@ export const parseDate = (dateString: string): TimelineDate | null => {
 
 const getMedia = (
   eventItem: EventItemType<SlideType>,
-): string | H5PMedia | undefined => {
+): string | H5PMedia | any | undefined => {
   let media;
   switch (eventItem.mediaType) {
     case 'image':
@@ -101,6 +101,10 @@ const getMedia = (
 
     case 'custom':
       media = eventItem.customMedia;
+      break;
+
+    case 'quote':
+      media = eventItem.customQuote;
       break;
 
     case 'none':
@@ -194,19 +198,29 @@ export const mapEventToTimelineSlide = (
     console.error(
       `End date (${event.endDate}) should be LATER than start date (${event.startDate}) in Slide "${event.title}"`,
     );
+    alert(`End date (${event.endDate}) should be LATER than start date (${event.startDate}) in Slide "${event.title}"`,);
   }
 
   let media = getMedia(event);
-  if (typeof media === 'string') {
-    media = media.replace(/&lt;/g, '<').replace(/&gt;/g, '>') ;
-  }
   if (media) {
-    slide.media = {
-      url: typeof media === 'string' ? media : media.path,
-      alt: event.mediaType === 'image' ? event.imageAlt : undefined,
-      credit: event.info !== undefined ? event.info.credit : '',
-      caption: event.info !== undefined ? event.info.caption : '',
-    };
+    if (event.mediaType !== 'quote') {
+      slide.media = {
+        url: typeof media === 'string' ? media : media.path,
+        alt: event.mediaType === 'image' ? event.imageAlt : undefined,
+        credit: event.info !== undefined ? event.info.credit : '',
+        caption: event.info !== undefined ? event.info.caption : '',
+      };
+    }
+    else {
+      let txt = media.params.text;
+      txt = txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>') ;    
+      slide.media = {
+        url: txt,
+        alt: undefined,
+        credit: '',
+        caption: '',
+      };
+    }
   }
 
   if (event.appearance.backgroundType === 'color') {
