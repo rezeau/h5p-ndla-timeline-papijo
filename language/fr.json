@@ -187,10 +187,13 @@
                 "label": "Audio"
               },
               {
-                "label": "External link"
+                "label": "Lien externe"
               },
               {
-                "label": "None"
+                "label": "Citation"
+              },
+              {
+                "label": "Aucun"
               }
             ]
           },
@@ -212,11 +215,15 @@
             "description": "Insérer un lien vers des ressources externes. Certains sites Web seront rendus sous forme d&#39;intégrations spécialisées, telles que Twitter, YouTube, Wikipedia et Google Maps. Voir la liste complète dans la <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Documentation Knightlab</a>"
           },
           {
+            "label": "Citation",
+            "description": "Insérez une courte citation et une référence à l'intérieur des balises &lt;blockquote&gt ; et &lt;cite&gt ; <br>e.g. &lt;blockquote&gt;To be or not to be&lt;cite&gt;Shakespeare, Hamlet&lt;/cite&gt;&lt;/blockquote&gt ;"
+          },
+          {
             "label": "Information",
             "fields": [
               {
                 "label": "Crédits",
-                "description": "Crédits pour les médias"
+                "description": "Crédits pour les media"
               },
               {
                 "label": "Légende",
@@ -226,48 +233,48 @@
           },
           {
             "label": "Etiquettes",
-            "entity": "Tag",
+            "entity": "Etiquette",
             "field": {
-              "label": "Etiquette",
+              "label": "Tag",
               "fields": [
                 {
                   "label": "Id"
                 },
                 {
-                  "label": "Nom"
+                  "label": "Name"
                 },
                 {
-                  "label": "Couleur"
+                  "label": "Color"
                 },
                 {
-                  "label": "Est activé"
+                  "label": "Is active"
                 }
               ]
             }
           },
           {
-            "label": "Apparence",
+            "label": "Appearance",
             "fields": [
               {
-                "label": "Arrière-plan",
+                "label": "Background",
                 "options": [
                   {
-                    "label": "Couleur"
+                    "label": "Color"
                   },
                   {
                     "label": "Image"
                   },
                   {
-                    "label": "Aucun"
+                    "label": "None"
                   }
                 ]
               },
               {
-                "label": "Couleur d'arrière-plan",
+                "label": "Background color",
                 "default": "#757575"
               },
               {
-                "label": "Image d'arrière-plan'"
+                "label": "Background image"
               }
             ]
           }
@@ -290,7 +297,8 @@
                 "label": "Nom"
               },
               {
-                "label": "Couleur"
+                "label": "Couleur",
+                "default": "#E0E0E0"
               }
             ]
           }
@@ -358,6 +366,14 @@
               "label": "au-dessus de la frise"
             }
           ]
+        },
+        {
+          "label": "Commencer à la fin",
+          "description": "Cochez cette case si vous souhaitez que la frise chronologique soit affichée sur la dernière page."
+        },
+        {
+          "label": "Page de démarrage par défaut",
+          "description": "Démarrer la frise chronologique à un numéro de page donné. Si le numéro que vous saisissez est supérieur au nombre de pages, votre frise chronologique commencera à la dernière page."
         }
       ]
     },

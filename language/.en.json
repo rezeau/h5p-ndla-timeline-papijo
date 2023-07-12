@@ -190,6 +190,9 @@
                 "label": "External link"
               },
               {
+                "label": "Quote"
+              },
+              {
                 "label": "None"
               }
             ]
@@ -210,6 +213,10 @@
           {
             "label": "External link",
             "description": "Insert a link to external resources. Certain websites will be rendered as specialized embeds, such as Twitter, YouTube, Wikipedia, and Google Maps. See full list in the <a href=\"https://timeline.knightlab.com/docs/media-types.html\" target=\"_blank\" rel=\"noopener noreferrer\">Knightlab docs</a>"
+          },
+          {
+            "label": "Quote",
+            "description": "Insert a short quote and reference enclosed within the &lt;blockquote&gt; and &lt;cite&gt; tags.<br>e.g. &lt;blockquote&gt;To be or not to be&lt;cite&gt;Shakespeare, Hamlet&lt;/cite&gt;&lt;/blockquote&gt;"
           },
           {
             "label": "Information",
@@ -290,7 +297,8 @@
                 "label": "Name"
               },
               {
-                "label": "Color"
+                "label": "Color",
+                "default": "#E0E0E0"
               }
             ]
           }
@@ -358,6 +366,14 @@
               "label": "top"
             }
           ]
+        },
+        {
+          "label": "Start at the end",
+          "description": "Check this box if you want this timeline to be displayed at the last slide."
+        },
+        {
+          "label": "Default start slide",
+          "description": "Start this timeline at a specific slide number. If the number you type exceeds the number of slides, your timeline will start at the last slide."
         }
       ]
     },
