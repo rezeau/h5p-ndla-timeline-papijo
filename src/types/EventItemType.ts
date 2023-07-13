@@ -15,6 +15,7 @@ export type EventItemType<S extends SlideType> = {
   descriptionImage?: H5PImage;
   descriptionCopyright?: H5PCopyright;
   TextOrImage?: string;
+  descriptionImageAlt?: string;
 
   endDate?: string;
 

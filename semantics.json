@@ -440,7 +440,7 @@
         },
         {
           "label": "Alternative text",
-          "description": "Required. If the browser can't load the image this text will be displayed instead. Also used by \"text-to-speech\" readers.",
+          "description": "Required. If the browser can't load the image this text will be displayed instead. Also used by \"text-to-speech\" readers. Also used to display a Caption under images inserted instead of text in the Slide Description field.",
           "name": "descriptionImageAlt",
           "type": "text",
           "widget": "showWhen",

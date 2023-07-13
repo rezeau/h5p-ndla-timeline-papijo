@@ -161,6 +161,7 @@ export const mapEventToTimelineSlide = (
       );
     }
     text = tagsMarkup;
+    console.log(JSON.stringify(event, undefined, 4));
     // Check if event.description.params.text is undefined or not.
     if (event.TextOrImage !== 'none') {
       if (event.description && event.TextOrImage === 'text') {
@@ -169,8 +170,10 @@ export const mapEventToTimelineSlide = (
         </div>`;
       }
       else if (event.descriptionImage && event.TextOrImage === 'image') {
-        text += html`<img alt="" src="` + event.descriptionImage.path + `" />
-        </div>`;
+        text += html`<div>
+          <img class="h5p-tl-slide-description tl-media-image tl-media-shadow" alt="" src="` + event.descriptionImage.path + `" />
+        </div>
+        <div><div class="tl-caption">` + event.descriptionImageAlt + `</div>`;
       }
     }
     else {

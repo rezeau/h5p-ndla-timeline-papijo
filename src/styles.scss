@@ -169,6 +169,10 @@
     max-height: calc( var(--h5p-timeline-slide-height) - 32px );
   }
 
+  .tl-media-blockquote {
+    max-height: calc( var(--h5p-timeline-slide-height) - 7.5em );;
+  }
+
   .tl-timeline h1, .tl-timeline h2, .tl-timeline h3, .tl-timeline h4, .tl-timeline h5, .tl-timeline h6 {
     font-size: revert;
   }
