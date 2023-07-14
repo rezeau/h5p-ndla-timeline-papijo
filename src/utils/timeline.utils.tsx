@@ -170,7 +170,7 @@ export const mapEventToTimelineSlide = (
       }
       else if (event.descriptionImage && event.TextOrImage === 'image') {
         text += html`<div>
-          <img class="tl-media-image tl-media-shadow" alt="" src="` + event.descriptionImage.path + `" />
+          <img class="tl-media-shadow" alt="" src="` + event.descriptionImage.path + `" />
         </div>
         <div><div class="tl-caption">${event.descriptionImageAlt ?? ''}</div>`;
       }

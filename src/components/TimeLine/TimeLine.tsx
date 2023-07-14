@@ -44,7 +44,7 @@ export const TimeLine: React.FC<TimeLineProps> = ({
     throw new Error('Unexpected error: Missing name');
   }
   // See https://stackoverflow.com/questions/54496398/typescript-type-string-undefined-is-not-assignable-to-type-string
-  let zoom = (!data.behaviour.initialZoom ? '2' : data.behaviour.initialZoom as string);
+  let zoom = (!data.behaviour.initialZoom ? '0' : data.behaviour.initialZoom as string);
   let timenavPosition =  (!data.behaviour.timenavPosition ? '2' : data.behaviour.timenavPosition as string);
   let startatend =  data.behaviour.startatend;
   let startatslide = (data.behaviour.startatend ? '0' : data.behaviour.startatslide);

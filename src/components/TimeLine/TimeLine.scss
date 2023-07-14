@@ -70,8 +70,8 @@
       }
 
       .tl-media {
-        margin-bottom: 0 !important;
-        margin-top: 0 !important;
+        margin-bottom: auto !important;
+        margin-top: auto !important;
       }
 
       .tl-text {
@@ -141,9 +141,10 @@
 /**
  * {1} Override `.tl-timeline p { line-height: 1.3em }`
  */
-.tl-text {
+.tl-text-content-container {
   $padding-top: 16px;
   $padding-bottom: 16px;
+  padding-right: 8px;
 
   max-height: calc(
     var(--h5p-timeline-slide-height) - #{$padding-top + $padding-bottom}
@@ -291,8 +292,8 @@
     text-align:left;
     clear:both;
     font-style: normal!important;
-    width: 100%!important;
-    margin-top: 2em;    
+    width: 100%;
+    margin-top: 2em;
     blockquote {
       font-size: 1.2em!important;
       margin-left: 1em;
@@ -313,4 +314,14 @@
     position: absolute;
     top: 0.3em;
   }
+}
+
+/* Used when no description text and slide media only */
+.tl-storyslider img {
+  max-height: calc( var(--h5p-timeline-slide-height) - 8.8em );
+}
+
+.tl-storyslider video {
+  max-height: calc( var(--h5p-timeline-slide-height) - 8.8em )!important;
+  display: revert!important;
 }
