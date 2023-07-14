@@ -163,7 +163,7 @@ export const mapEventToTimelineSlide = (
     text = tagsMarkup;
     // Check if event.description.params.text is undefined or not.
     if (event.TextOrImage !== 'none') {
-      if (event.description && event.TextOrImage === 'text') {
+      if (event.description && event.TextOrImage !== 'image') {
         text += html`<div class="h5p-tl-slide-description">
           ${event.description.params.text ?? ''}
         </div>`;
