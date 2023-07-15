@@ -20,16 +20,11 @@ function updateEventPaths(
   item: EventItemType<SlideType>,
   contentId: string,
 ): void {
+
   if (item.mediaType === 'image' && item.image) {
     // Item has uploaded image
-
     // eslint-disable-next-line no-param-reassign
     item.image.path = normalizeAssetPath(item.image.path, contentId);
-  }
-  else if (item.descriptionImage) {
-    // Item has uploaded image
-    // eslint-disable-next-line no-param-reassign
-    item.descriptionImage.path = normalizeAssetPath(item.descriptionImage.path, contentId);
   }
   else if (
     item.mediaType === 'video' &&
@@ -54,6 +49,12 @@ function updateEventPaths(
       // eslint-disable-next-line no-param-reassign
       audio.path = normalizeAssetPath(audio.path, contentId);
     });
+  }
+
+  if (item.descriptionImage) {
+    // Item has uploaded image
+    // eslint-disable-next-line no-param-reassign
+    item.descriptionImage.path = normalizeAssetPath(item.descriptionImage.path, contentId);
   }
 
   if (
