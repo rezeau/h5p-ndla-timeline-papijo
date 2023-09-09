@@ -4,22 +4,14 @@
       "label": "Afficher la diapositive de titre"
     },
     {
-      "label": "Diapositive du titre",
+      "label": "Titre de la diapositive de titre",
       "fields": [
         {
-          "label": "Type de diapositive",
-          "default": "titre"
+          "label": "Slide type",
+          "default": "title"
         },
         {
           "label": "Titre"
-        },
-        {
-          "label": "Date de début",
-          "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
-        },
-        {
-          "label": "Date de fin",
-          "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
         },
         {
           "label": "Description"
@@ -28,7 +20,7 @@
           "label": "Mise en page",
           "options": [
             {
-              "label": "Texte à droite (standard)"
+              "label": "Text à droite (défaut)"
             },
             {
               "label": "Texte à gauche"
@@ -42,7 +34,7 @@
               "label": "Image"
             },
             {
-              "label": "Vidéo"
+              "label": "Video"
             },
             {
               "label": "Audio"
@@ -56,14 +48,14 @@
           ]
         },
         {
-          "label": "Image d'arrière-plan"
+          "label": "Image"
         },
         {
           "label": "Texte alternatif",
           "description": "Requis. Si le navigateur ne peut pas charger l&#39;image, ce texte sera affiché à la place. Également utilisé par les lecteurs &quot;text-to-speech&quot;."
         },
         {
-          "label": "Vidéo"
+          "label": "Video"
         },
         {
           "label": "Audio"
@@ -77,7 +69,7 @@
           "fields": [
             {
               "label": "Crédits",
-              "description": "Crédits pour les médias"
+              "description": "Crédits pour les media"
             },
             {
               "label": "Légende",
@@ -125,8 +117,8 @@
         "label": "Item",
         "fields": [
           {
-            "label": "Type de diapositive",
-            "default": "régulier"
+            "label": "Slide type",
+            "default": "regular"
           },
           {
             "label": "Titre"
@@ -136,7 +128,7 @@
             "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
           },
           {
-            "label": "Date de fin",
+            "label": "End date",
             "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
           },
           {
@@ -149,7 +141,7 @@
                 "label": "Image"
               },
               {
-                "label": "Aucune description"
+                "label": "Aucun"
               }
             ]
           },
@@ -167,7 +159,7 @@
             "label": "Mise en page",
             "options": [
               {
-                "label": "Texte à droite (standard)"
+                "label": "Text à droite (défaut)"
               },
               {
                 "label": "Texte à gauche"
@@ -216,7 +208,7 @@
           },
           {
             "label": "Citation",
-            "description": "Insérez une courte citation et une référence à l'intérieur des balises &lt;blockquote&gt ; et &lt;cite&gt ; <br>e.g. &lt;blockquote&gt;To be or not to be&lt;cite&gt;Shakespeare, Hamlet&lt;/cite&gt;&lt;/blockquote&gt ;"
+            "description": "Insérer une courte citation et une référence à l’intérieur des balises  &lt;blockquote&gt; et &lt;cite&gt;.<br>par ex. &lt;blockquote&gt;To be or not to be&lt;cite&gt;Shakespeare, Hamlet&lt;/cite&gt;&lt;/blockquote&gt;"
           },
           {
             "label": "Information",
@@ -232,19 +224,19 @@
             ]
           },
           {
-            "label": "Etiquettes",
-            "entity": "Etiquette",
+            "label": "Tags",
+            "entity": "Étiquettes",
             "field": {
-              "label": "Tag",
+              "label": "Étiquette",
               "fields": [
                 {
                   "label": "Id"
                 },
                 {
-                  "label": "Name"
+                  "label": "Nom"
                 },
                 {
-                  "label": "Color"
+                  "label": "Couleur"
                 },
                 {
                   "label": "Is active"
@@ -252,29 +244,29 @@
               ]
             }
           },
-          {
-            "label": "Appearance",
-            "fields": [
-              {
-                "label": "Background",
-                "options": [
-                  {
-                    "label": "Color"
-                  },
-                  {
-                    "label": "Image"
-                  },
-                  {
-                    "label": "None"
-                  }
-                ]
-              },
-              {
-                "label": "Background color",
-                "default": "#757575"
-              },
-              {
-                "label": "Background image"
+        {
+          "label": "Apparence",
+          "fields": [
+            {
+              "label": "Arrière-plan",
+              "options": [
+                {
+                  "label": "Couleur"
+                },
+                {
+                  "label": "Image"
+                },
+                {
+                  "label": "Aucun"
+                }
+              ]
+            },
+            {
+              "label": "Couleur d'arrière-plan",
+              "default": "#757575"
+            },
+            {
+              "label": "Image d'arrière-plan'"
               }
             ]
           }
@@ -297,8 +289,7 @@
                 "label": "Nom"
               },
               {
-                "label": "Couleur",
-                "default": "#E0E0E0"
+                "label": "Couleur"
               }
             ]
           }
@@ -310,7 +301,7 @@
       "fields": [
         {
           "label": "Périodes",
-          "entity": "Période",
+          "entity": "Era",
           "field": {
             "label": "Période",
             "fields": [
@@ -505,6 +496,7 @@
           "label": "Russe"
         },
         {
+          
           "label": "Serbe - Cyrillic"
         },
         {
