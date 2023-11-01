@@ -128,7 +128,7 @@
             "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
           },
           {
-            "label": "End date",
+            "label": "Date de fin",
             "description": "AAAA-MM-JJ — seule l&#39;année est requise. Les années peuvent être négatives."
           },
           {
@@ -301,7 +301,7 @@
       "fields": [
         {
           "label": "Périodes",
-          "entity": "Era",
+          "entity": "Période",
           "field": {
             "label": "Période",
             "fields": [
