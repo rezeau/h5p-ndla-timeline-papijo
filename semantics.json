@@ -1,5 +1,11 @@
 [
   {
+    "name": "info",
+    "type": "boolean",
+    "label": "Tutorial and Examples: <a href=\"http://www.h5p.rezeau.org\" target=\"_blank\" rel=\"noopener\">Papi Jo's H5P Moodle site</a></span>",
+    "description": "<span style=\"color: white;margin-top: -20px;display: table-caption;font-size: large;\">&#9608;</span>"
+  },
+  {
     "label": "Show title slide",
     "name": "showTitleSlide",
     "type": "boolean",
