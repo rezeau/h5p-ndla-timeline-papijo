@@ -1,9 +1,9 @@
 {
-  "name": "h5p-timeline",
-  "version": "0.1.0",
+  "name": "h5p-timeline papi Jo",
+  "version": "0.2.3",
   "description": "",
   "keywords": [],
-  "author": "NDLA",
+  "author": "NDLA & papi Jo",
   "license": "MPL",
   "scripts": {
     "watch": "webpack --mode=development --watch",
@@ -11,9 +11,11 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
-    "test:watch": "npm test -- --watch",
-    "storybook": "storybook dev -p 6006 --disable-telemetry",
-    "build-storybook": "storybook build --disable-telemetry"
+    "test:watch": "npm test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rezeau/h5p-ndla-timeline-papijo.git"
   },
   "dependencies": {
     "@knight-lab/timelinejs": "^3.9.2",
