@@ -60,6 +60,11 @@
       "minorVersion": 1
     },
     {
+      "machineName": "H5P.AdvancedTextPapiJo",
+      "majorVersion": 1,
+      "minorVersion": 2
+    },
+    {
       "machineName": "H5P.SimpleTextareaPapiJo",
       "majorVersion": 1,
       "minorVersion": 0
