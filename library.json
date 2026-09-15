@@ -3,9 +3,9 @@
   "description": "Create timelines and add images, video and audio.",
   "license": "MPL",
   "machineName": "H5P.NDLATimelinePapiJo",
-  "majorVersion": 0,
-  "minorVersion": 2,
-  "patchVersion": 3,
+  "majorVersion": 1,
+  "minorVersion": 0,
+  "patchVersion": 0,
   "runnable": 1,
   "fullscreen": 1,
   "embedTypes": [
