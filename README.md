@@ -59,3 +59,19 @@ will suffice.
 For more information on how to use H5P, please have a look at
 https://youtu.be/xEgBJaRUBGg and the H5P developer guide at
 https://h5p.org/library-development.
+
+## Development notes
+
+### AdvancedTextPapiJo tooltip runtime support
+
+H5P.NDLATimelinePapiJo supports H5P.AdvancedTextPapiJo 1.2 for backward
+compatibility with existing content.
+
+AdvancedTextPapiJo tooltip markup can be created and edited inside TimelinePapiJo,
+but the enhanced tooltip is not currently initialized at runtime. TimelinePapiJo
+renders the AdvancedText content from `description.params.text` rather than
+attaching the AdvancedTextPapiJo child instance.
+
+There is no evidence that tooltip runtime support previously worked inside
+TimelinePapiJo, so this is considered a possible future enhancement rather than
+a regression in version 1.0.1.
