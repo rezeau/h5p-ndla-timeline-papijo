@@ -8,7 +8,7 @@ const mode = process.argv.includes('--mode=production') ?
 
 module.exports = {
   entry: {
-    bundle: ['react-hot-loader/patch', './src/index.tsx'],
+    bundle: './src/index.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -91,9 +91,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.tsx', '.ts', '.scss'],
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
+  },
+  performance: {
+    maxAssetSize: 400 * 1024,
+    maxEntrypointSize: 500 * 1024,
   },
   plugins: [
     new BundleAnalyzerPlugin({

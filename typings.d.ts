@@ -82,7 +82,7 @@ declare module '@knight-lab/timelinejs' {
         title?: Optional<TimelineSlide, 'start_date'>;
         events: Array<TimelineSlide>;
         eras: Array<TimelineEra>;
-        scale?: 'human' | 'cosmological' = 'human';
+        scale?: 'human' | 'cosmological';
         initial_zoom?: string | undefined;
         timenav_position?: string | undefined;
       };
