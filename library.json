@@ -4,8 +4,8 @@
   "license": "MPL",
   "machineName": "H5P.NDLATimelinePapiJo",
   "majorVersion": 1,
-  "minorVersion": 0,
-  "patchVersion": 2,
+  "minorVersion": 1,
+  "patchVersion": 0,
   "runnable": 1,
   "fullscreen": 1,
   "embedTypes": [
