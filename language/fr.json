@@ -3,7 +3,7 @@
       {
       "name": "info",
       "type": "boolean",
-      "label": "Tutoriel & Exemples: <a href=\"http://www.h5p.rezeau.org\" target=\"_blank\" rel=\"noopener\">Papi Jo's H5P Moodle site</a></span>",
+      "label": "Tutoriel & Exemples: <a href=\"http://www.h5p.rezeau.org\" target=\"_blank\" rel=\"noopener\">Le site H5P WordPress de papi Jo</a></span>",
       "description": "<span style=\"color: white;margin-top: -20px;display: table-caption;font-size: large;\">&#9608;</span>"
     },
     {
