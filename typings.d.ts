@@ -107,7 +107,7 @@ declare module '@knight-lab/timelinejs' {
     /*
      * Optional start at specific slide
      */
-    start_at_slide?: string | undefined;
+    start_at_slide?: number | undefined;
     /*
      * Optional tweak the default zoom level
      */
@@ -183,7 +183,9 @@ declare module '@knight-lab/timelinejs' {
       ];
     };
 
-    on: (type: string, callback: () => void, context?: object) => void;
+    current_id: string;
+    on: (type: string, callback: (event: { unique_id?: string }) => void, context?: object) => void;
+    off: (type: string, callback: (event: { unique_id?: string }) => void, context?: object) => void;
   }
 }
 

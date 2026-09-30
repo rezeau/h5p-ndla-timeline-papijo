@@ -13,6 +13,7 @@ import * as React from 'react';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useEffectOnce } from 'react-use';
 import { buildH5PMediaInstance } from '../../H5P/H5P.util';
+import { TimelineDescriptionTooltipController } from '../../H5P/TimelineDescriptionTooltipController';
 import { H5PContext } from '../../contexts/H5PContext';
 import { L10nContext } from '../../contexts/LocalizationContext';
 import { Params } from '../../types/Params';
@@ -36,10 +37,13 @@ export const TimeLine: React.FC<TimeLineProps> = ({
   contentId,
   onMediaInstanceBuilt,
 }: TimeLineProps) => {
-  const [timelineDefinition, classNames] = React.useMemo(
+  const [timelineDefinition, classNames, descriptionRuntimeAdapter] = React.useMemo(
     () => createTimelineDefinition(timelineTitle, data),
     [data, timelineTitle],
   );
+  const descriptionRuntimeAdapterRef = useRef(descriptionRuntimeAdapter);
+  descriptionRuntimeAdapterRef.current = descriptionRuntimeAdapter;
+  const timelineRef = useRef<Timeline | null>(null);
   if (!data.behaviour) {
     throw new Error('Unexpected error: Missing name');
   }
@@ -48,12 +52,12 @@ export const TimeLine: React.FC<TimeLineProps> = ({
   let timenavPosition =  (!data.behaviour.timenavPosition ? '2' : data.behaviour.timenavPosition as string);
   let startatend =  data.behaviour.startatend;
   let startatslide = (data.behaviour.startatend ? '0' : data.behaviour.startatslide);
-  // We need to substract 1 from the startatslide number string because slides are numbered from 0.
-  // So we need various conversions from string to number and back from number to string.
+  // Convert the authored one-based slide number to a numeric zero-based index.
+  // TimelineJS goTo uses n === 0 to activate the title slide; "0" misses it.
   startatslide = Number(startatslide).toString();
   const numericValue = parseInt(startatslide);
   const result = numericValue - 1;
-  const startatslidenb = result.toString();
+  const startatslidenb = result;
   
   const [height, setHeight] = useState(0);
   const [slideWidth, setSlideWidth] = useState(0);
@@ -117,20 +121,40 @@ export const TimeLine: React.FC<TimeLineProps> = ({
       start_at_slide: startatslidenb,
       start_at_end: startatend,
     });
+    timelineRef.current = timeline;
 
     const timelineContainer = containerRef.current?.querySelector(
       `#${containerId}`,
     );
 
-    // Timeline sends out events. No need for Mutation observers.
-    timeline.on('loaded', () => {
-      if (!timelineContainer) {
+    let loaded = false;
+    let disposed = false;
+    let resizeTimer: number | undefined;
+    let resizeFrame: number | undefined;
+    let initialResizeFrame: number | undefined;
+    const handleResize = (): void => {
+      if (resizeFrame !== undefined) {
         return;
       }
+      resizeFrame = window.requestAnimationFrame(() => {
+        resizeFrame = undefined;
+        if (disposed || !containerRef.current) {
+          return;
+        }
+        const { width } = containerRef.current.getBoundingClientRect();
+        setHeight(width / aspectRatio);
+      });
+    };
+
+    const handleLoaded = (): void => {
+      if (!timelineContainer || loaded || disposed) {
+        return;
+      }
+      loaded = true;
 
       // Timeline needs one extra resize after some(TM) time.
       const waitToResize = (quitInMS = 5000, timeout = 50) => {
-        if (quitInMS < 0) {
+        if (quitInMS < 0 || disposed) {
           return; // Tried long enough
         }
 
@@ -142,7 +166,7 @@ export const TimeLine: React.FC<TimeLineProps> = ({
           Number.isNaN(menuBarTop) || menuBarTop < 0
         ) {
           h5pInstance?.trigger('resize');
-          window.setTimeout(() => {
+          resizeTimer = window.setTimeout(() => {
             waitToResize(quitInMS - timeout);
           }, timeout);
         }
@@ -177,23 +201,27 @@ export const TimeLine: React.FC<TimeLineProps> = ({
       setTimelineIsRendered(true);
       
 
-      h5pInstance?.on('resize', () => {
-        window.requestAnimationFrame(() => {
-          if (!containerRef.current) {
-            return;
-          }
-
-          const container = containerRef.current;
-
-          const { width } = container.getBoundingClientRect();
-          setHeight(width / aspectRatio);
-        });
-      });
+      h5pInstance?.on('resize', handleResize);
       
-      window.requestAnimationFrame(() => {
+      initialResizeFrame = window.requestAnimationFrame(() => {
         h5pInstance?.trigger('resize');
       });
-    });
+    };
+    timeline.on('loaded', handleLoaded);
+
+    return () => {
+      disposed = true;
+      timeline.off('loaded', handleLoaded);
+      h5pInstance?.off('resize', handleResize);
+      window.clearTimeout(resizeTimer);
+      if (resizeFrame !== undefined) {
+        window.cancelAnimationFrame(resizeFrame);
+      }
+      if (initialResizeFrame !== undefined) {
+        window.cancelAnimationFrame(initialResizeFrame);
+      }
+      timelineRef.current = null;
+    };
   });
 
   useEffect(() => {
@@ -311,6 +339,40 @@ export const TimeLine: React.FC<TimeLineProps> = ({
       observer.disconnect();
     };
   }, [timelineIsRendered, translations]);
+
+  // Run after the existing HTML/link repair effect: replacing innerHTML after
+  // tooltip initialization would detach the runtime's trigger listeners.
+  useEffect(() => {
+    const timeline = timelineRef.current;
+    const container = containerRef.current;
+    if (!timelineIsRendered || !timeline || !container) {
+      return;
+    }
+    let resizeFrame: number | undefined;
+    const controller = new TimelineDescriptionTooltipController({
+      adapter: descriptionRuntimeAdapterRef.current,
+      container,
+      timeline,
+      resizeEvents: h5pInstance,
+      contentId,
+      onResize: () => {
+        if (resizeFrame !== undefined) {
+          return;
+        }
+        resizeFrame = window.requestAnimationFrame(() => {
+          resizeFrame = undefined;
+          h5pInstance?.trigger('resize');
+        });
+      },
+    });
+    controller.handleLoaded();
+    return () => {
+      controller.destroy();
+      if (resizeFrame !== undefined) {
+        window.cancelAnimationFrame(resizeFrame);
+      }
+    };
+  }, [timelineIsRendered, contentId, h5pInstance]);
 
   const style: React.CSSProperties = {
     height,

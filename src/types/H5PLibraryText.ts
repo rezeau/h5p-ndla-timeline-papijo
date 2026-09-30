@@ -1,3 +1,5 @@
+import { H5PImage } from 'h5p-types';
+
 type H5PMetadataAuthor = {
   name: string,
   role: 'Author' | 'Editor' | 'Licensee' | 'Originator',
@@ -25,15 +27,23 @@ type H5PMetadata = {
   contentType?: string
 }
 
+export type H5PTooltipImage = {
+  id: string;
+  image: H5PImage;
+  alt: string;
+};
+
+export type H5PLibraryTextParams = {
+  text?: string;
+  tooltipImages?: Array<H5PTooltipImage>;
+  [key: string]: unknown;
+}
+
 type H5PLibraryParams = {
   library?: string,
-  params: any,
+  params: H5PLibraryTextParams,
   metadata?: H5PMetadata,
   subContentId?: string
 }
 
-export type H5PLibraryText = H5PLibraryParams & {
-  params: {
-    text: string;
-  }
-}
+export type H5PLibraryText = H5PLibraryParams;

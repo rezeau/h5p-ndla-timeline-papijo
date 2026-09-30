@@ -16,6 +16,10 @@ import { Params } from '../types/Params';
 import { SlideType } from '../types/SlideType';
 import { isDefined } from './is-defined.utils';
 import { H5PContentId } from 'h5p-types';
+import {
+  createTimelineDescriptionHostId,
+  TimelineDescriptionRuntimeAdapter,
+} from '../H5P/TimelineDescriptionRuntimeAdapter';
 
 const html = String.raw;
 
@@ -140,8 +144,26 @@ const isDateOrderOK = (
 
 export const mapEventToTimelineSlide = (
   event: EventItemType<SlideType>,
+  descriptionRuntimeAdapter = new TimelineDescriptionRuntimeAdapter(),
 ): TimelineSlide => {
   const startDate = event.startDate ? parseDate(event.startDate) : null;
+
+  // The `layout-x` part of this ID is used for styling and must not be removed
+  // before we find another way to change slide layouts.
+  // Work around h5p-types that fails jest test when importing H5P.
+  const id = `${(window as any).H5P.createUUID()}_layout-${event.layout}`;
+  const descriptionIsRendered =
+    event.layout !== 'custom' &&
+    !!event.description &&
+    event.TextOrImage !== 'none' &&
+    event.TextOrImage !== 'image';
+  const descriptionHostId = descriptionIsRendered
+    ? createTimelineDescriptionHostId(id)
+    : undefined;
+
+  if (descriptionHostId && event.description) {
+    descriptionRuntimeAdapter.register(id, descriptionHostId, event.description);
+  }
 
   let text;
   const eventHasCustomLayout = event.layout === 'custom';
@@ -164,7 +186,7 @@ export const mapEventToTimelineSlide = (
     // Check if event.description.params.text is undefined or not.
     if (event.TextOrImage !== 'none') {
       if (event.description && event.TextOrImage !== 'image') {
-        text += html`<div class="h5p-tl-slide-description">
+        text += html`<div id="${descriptionHostId}" class="h5p-tl-slide-description">
           ${event.description.params.text ?? ''}
         </div>`;
       }
@@ -180,10 +202,6 @@ export const mapEventToTimelineSlide = (
     }
   }
 
-  // The `layout-x` part of this ID is used for styling and must not be removed
-  // before we find another way to change slide layouts
-  // Work around h5p-types that fails jest test when importing H5P
-  const id = `${(window as any).H5P.createUUID()}_layout-${event.layout}`;
   const endDate = event.endDate ? parseDate(event.endDate) : null;
   const slide: TimelineSlide = {
     unique_id: id,
@@ -266,9 +284,16 @@ export const mapEraToTimelineEra = (era: Era): TimelineEra | null => {
 export const createTimelineDefinition = (
   title: string,
   data: Params,
-): [TimelineDefinition, string | undefined] => {
+): [
+  TimelineDefinition,
+  string | undefined,
+  TimelineDescriptionRuntimeAdapter,
+] => {
+  const descriptionRuntimeAdapter = new TimelineDescriptionRuntimeAdapter();
   const items = data.timelineItems ?? [];
-  const events = items.map(mapEventToTimelineSlide).filter(isDefined);
+  const events = items
+    .map((item) => mapEventToTimelineSlide(item, descriptionRuntimeAdapter))
+    .filter(isDefined);
   const eras = (data.eras ?? []).map(mapEraToTimelineEra).filter(isDefined);
 
   const timeline: TimelineDefinition = {
@@ -280,7 +305,8 @@ export const createTimelineDefinition = (
     // eslint-disable-next-line no-param-reassign
     data.titleSlide.title = data.titleSlide.title ?? title;
     timeline.title =
-      data.titleSlide && mapEventToTimelineSlide(data.titleSlide);
+      data.titleSlide &&
+      mapEventToTimelineSlide(data.titleSlide, descriptionRuntimeAdapter);
   }
 
   let classNames: string | undefined;
@@ -295,7 +321,7 @@ export const createTimelineDefinition = (
     timeline.scale = scalingMode;
   }
 
-  return [timeline, classNames];
+  return [timeline, classNames, descriptionRuntimeAdapter];
 };
 
 export const fallbackLocale = 'en';
