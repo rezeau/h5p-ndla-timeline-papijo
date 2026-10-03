@@ -46,6 +46,63 @@ describe('Timeline description runtime architecture', () => {
     };
   });
 
+  describe.each([
+    ['regular', 'right'],
+    ['regular', 'left'],
+    ['regular', 'custom'],
+    ['title', 'right'],
+    ['title', 'left'],
+    ['title', 'custom'],
+  ] as const)('%s slide with %s layout', (slideType, layout) => {
+    it.each([
+      ['H5P.AdvancedTextPapiJo 1.2', false, true],
+      ['H5P.AdvancedTextPapiJo 1.2', true, true],
+      ['H5P.AdvancedTextPapiJo 1.2.4', false, true],
+      ['H5P.AdvancedText 1.1', true, false],
+      ['H5P.OtherLibrary 1.0', true, false],
+      [undefined, true, false],
+    ] as const)(
+      'scopes %s HTML with tooltips=%s only on the PapiJo route',
+      (library, hasTooltip, receivesScope) => {
+        const tooltip = hasTooltip
+          ? '<span class="papijo-tooltip" data-papijo-tooltip="Help">Term</span>'
+          : 'No tooltip';
+        const html = '<figure class="table"><table><tbody><tr><td>Cell</td></tr></tbody></table></figure>' +
+          `<p>${tooltip}</p>`;
+        const event = {
+          ...makeEvent('scope', { library, params: { text: html } }),
+          layout,
+          eventContent: { items: [{
+            id: 'text', type: 'textContent' as const,
+            x: 0, y: 0, width: 100, height: 100,
+          }] },
+        };
+        const [definition] = createTimelineDefinition('Timeline', {
+          showTitleSlide: slideType === 'title',
+          titleSlide: { ...event, slideType: 'title' },
+          timelineItems: slideType === 'regular' ? [event] : [],
+        });
+        if (typeof definition === 'string') {
+          throw new Error('Expected an object Timeline definition.');
+        }
+        const slide = slideType === 'title' ? definition.title : definition.events[0];
+        const container = document.createElement('div');
+        container.innerHTML = (slide?.text as { text: string }).text;
+        const host = container.querySelector('figure.table')?.parentElement;
+
+        expect(host).toBeDefined();
+        expect(host?.classList.contains(
+          layout === 'custom' ? 'textContent' : 'h5p-tl-slide-description',
+        )).toBe(true);
+        expect(host?.classList.contains('h5p-advanced-text')).toBe(receivesScope);
+        expect(container.querySelector('.h5p-advanced-text figure.table + p') !== null)
+          .toBe(receivesScope);
+        expect(host?.innerHTML).toContain(html);
+        expect(host?.querySelector('.papijo-tooltip') !== null).toBe(hasTooltip);
+      },
+    );
+  });
+
   it('keeps AdvancedText 1.1 HTML unchanged and on the ordinary route', () => {
     const html = '<p>Ordinary <strong>AdvancedText</strong></p>';
     const original = makeDescription('H5P.AdvancedText 1.1', { text: html });

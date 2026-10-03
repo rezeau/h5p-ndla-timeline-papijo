@@ -161,9 +161,9 @@ export const mapEventToTimelineSlide = (
     ? createTimelineDescriptionHostId(id)
     : undefined;
 
-  if (descriptionHostId && event.description) {
-    descriptionRuntimeAdapter.register(id, descriptionHostId, event.description);
-  }
+  const descriptionRuntimeEntry = descriptionHostId && event.description
+    ? descriptionRuntimeAdapter.register(id, descriptionHostId, event.description)
+    : undefined;
 
   let text;
   const eventHasCustomLayout = event.layout === 'custom';
@@ -186,7 +186,9 @@ export const mapEventToTimelineSlide = (
     // Check if event.description.params.text is undefined or not.
     if (event.TextOrImage !== 'none') {
       if (event.description && event.TextOrImage !== 'image') {
-        text += html`<div id="${descriptionHostId}" class="h5p-tl-slide-description">
+        const descriptionClassName = 'h5p-tl-slide-description' +
+          (descriptionRuntimeEntry?.route === 'advanced-text-papijo' ? ' h5p-advanced-text' : '');
+        text += html`<div id="${descriptionHostId}" class="${descriptionClassName}">
           ${event.description.params.text ?? ''}
         </div>`;
       }

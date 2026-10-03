@@ -105,6 +105,7 @@ describe('initial title tooltip with real TimelineJS', () => {
       const runtime = {
         root,
         initialize: jest.fn(() => {
+          root.classList.add('papijo-runtime-tooltips');
           trigger.classList.add('papijo-runtime-tooltip-trigger');
           trigger.setAttribute('aria-expanded', 'false');
           trigger.addEventListener('click', click);
@@ -196,6 +197,8 @@ describe('initial title tooltip with real TimelineJS', () => {
     const titleHost = titleSlide.querySelector('.h5p-tl-slide-description') as HTMLElement;
     const trigger = titleHost.querySelector('span') as HTMLElement;
     const titleRuntime = runtimes.find((runtime) => runtime.root === titleHost);
+    expect(titleHost.classList.contains('h5p-advanced-text')).toBe(true);
+    expect(titleHost.classList.contains('papijo-runtime-tooltips')).toBe(true);
     expect(titleSlide.hasAttribute('inert')).toBe(false);
     expect(trigger.classList.contains('papijo-runtime-tooltip-trigger')).toBe(true);
     expect(titleRuntime).toBeDefined();
@@ -221,6 +224,8 @@ describe('initial title tooltip with real TimelineJS', () => {
     expect(titleHost.querySelector('[role="tooltip"]')).toBeNull();
     expect(titleSlide.hasAttribute('inert')).toBe(true);
     const eventHost = container.querySelector('.tl-slide:not(.tl-slide-titleslide) .h5p-tl-slide-description') as HTMLElement;
+    expect(eventHost.classList.contains('h5p-advanced-text')).toBe(true);
+    expect(eventHost.classList.contains('papijo-runtime-tooltips')).toBe(true);
     (eventHost.querySelector('span') as HTMLElement).click();
     flushFrames();
     expect(eventHost.querySelector('[role="tooltip"]')).not.toBeNull();
@@ -231,6 +236,8 @@ describe('initial title tooltip with real TimelineJS', () => {
     expect(eventHost.querySelector('[role="tooltip"]')).toBeNull();
     expect(container.querySelector('.tl-slide-titleslide .h5p-tl-slide-description')).toBe(titleHost);
     expect(titleSlide.hasAttribute('inert')).toBe(false);
+    expect(titleHost.classList.contains('h5p-advanced-text')).toBe(true);
+    expect(titleHost.classList.contains('papijo-runtime-tooltips')).toBe(true);
     trigger.click();
     flushFrames();
     expect(titleHost.querySelector('[role="tooltip"]')).not.toBeNull();
