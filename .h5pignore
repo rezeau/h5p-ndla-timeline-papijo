@@ -2,6 +2,7 @@
 build_info
 node_modules
 src
+scripts
 .babelrc
 .eslintignore
 .eslintrc.json

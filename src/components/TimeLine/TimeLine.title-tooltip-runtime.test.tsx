@@ -6,7 +6,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { H5PContext } from '../../contexts/H5PContext';
-import { DescriptionTooltipRuntimeConstructor } from '../../H5P/TimelineDescriptionTooltipController';
 import { Params } from '../../types/Params';
 import { TimeLine } from './TimeLine';
 
@@ -40,24 +39,16 @@ jest.mock('@knight-lab/timelinejs', () => {
   };
 });
 
-// Exercise the installed TimelineJS lifecycle; only the optional child tooltip
-// runtime is mocked. Opening requests resize as the real runtime reserves space.
-describe('initial title tooltip with real TimelineJS', () => {
+// Exercise the installed TimelineJS lifecycle with ordinary description text.
+describe('ordinary descriptions with real TimelineJS', () => {
   let container: HTMLDivElement;
   let frames: Map<number, FrameRequestCallback>;
   let Runtime: jest.Mock;
-  let runtimes: Array<{
-    root: HTMLElement;
-    initialize: jest.Mock;
-    close: jest.Mock;
-    reposition: jest.Mock;
-    destroy: jest.Mock;
-  }>;
   let resizeListeners: Set<() => void>;
   const originalResizeObserver = window.ResizeObserver;
   const originalIntersectionObserver = window.IntersectionObserver;
   const optionalH5P = H5P as typeof H5P & {
-    AdvancedTextPapiJoTooltipRuntime?: DescriptionTooltipRuntimeConstructor;
+    AdvancedTextPapiJoTooltipRuntime?: jest.Mock;
   };
 
   beforeEach(() => {
@@ -82,45 +73,7 @@ describe('initial title tooltip with real TimelineJS', () => {
       frames.delete(id);
     });
     resizeListeners = new Set();
-    runtimes = [];
-    Runtime = jest.fn((root: HTMLElement, _contentId, _images, onResize: () => void) => {
-      const trigger = root.querySelector('span.papijo-tooltip') as HTMLElement;
-      let bubble: HTMLElement | null = null;
-      const close = jest.fn(() => {
-        bubble?.remove();
-        bubble = null;
-        trigger.setAttribute('aria-expanded', 'false');
-      });
-      const click = () => {
-        if (bubble) {
-          close();
-          return;
-        }
-        bubble = document.createElement('div');
-        bubble.setAttribute('role', 'tooltip');
-        root.appendChild(bubble);
-        trigger.setAttribute('aria-expanded', 'true');
-        onResize();
-      };
-      const runtime = {
-        root,
-        initialize: jest.fn(() => {
-          root.classList.add('papijo-runtime-tooltips');
-          trigger.classList.add('papijo-runtime-tooltip-trigger');
-          trigger.setAttribute('aria-expanded', 'false');
-          trigger.addEventListener('click', click);
-          return 1;
-        }),
-        close,
-        reposition: jest.fn(),
-        destroy: jest.fn(() => {
-          close();
-          trigger.removeEventListener('click', click);
-        }),
-      };
-      runtimes.push(runtime);
-      return runtime;
-    });
+    Runtime = jest.fn();
     optionalH5P.AdvancedTextPapiJoTooltipRuntime = Runtime;
     container = document.createElement('div');
     document.body.appendChild(container);
@@ -140,10 +93,7 @@ describe('initial title tooltip with real TimelineJS', () => {
   });
 
   const renderTimeline = async (showTitleSlide = true) => {
-    const description = {
-      library: 'H5P.AdvancedTextPapiJo 1.2',
-      params: { text: '<p><span class="papijo-tooltip" data-papijo-tooltip="Help">Term</span></p>' },
-    };
+    const description = '<p>Ordinary <strong>description</strong></p>';
     const base = {
       layout: 'right' as const, mediaType: 'none' as const,
       appearance: { backgroundType: 'none' as const }, description,
@@ -191,77 +141,49 @@ describe('initial title tooltip with real TimelineJS', () => {
     });
   };
 
-  it('keeps the live title tooltip open on initial load/resize and reuses it after title -> event -> title', async () => {
+  it('starts on the title, preserves descriptions across navigation, and cleans up resize', async () => {
     await renderTimeline();
     const titleSlide = container.querySelector('.tl-slide-titleslide') as HTMLElement;
     const titleHost = titleSlide.querySelector('.h5p-tl-slide-description') as HTMLElement;
-    const trigger = titleHost.querySelector('span') as HTMLElement;
-    const titleRuntime = runtimes.find((runtime) => runtime.root === titleHost);
-    expect(titleHost.classList.contains('h5p-advanced-text')).toBe(true);
-    expect(titleHost.classList.contains('papijo-runtime-tooltips')).toBe(true);
+    expect(titleHost.innerHTML).toContain('<p>Ordinary <strong>description</strong></p>');
+    expect(titleHost.classList.contains('h5p-advanced-text')).toBe(false);
     expect(titleSlide.hasAttribute('inert')).toBe(false);
-    expect(trigger.classList.contains('papijo-runtime-tooltip-trigger')).toBe(true);
-    expect(titleRuntime).toBeDefined();
-    expect(titleRuntime?.initialize).toHaveBeenCalledTimes(1);
-    expect(Runtime).toHaveBeenCalledTimes(2);
-
-    trigger.click();
-    expect(titleHost.querySelector('[role="tooltip"]')).not.toBeNull();
-    flushFrames();
-    expect(titleHost.querySelector('[role="tooltip"]')).not.toBeNull();
-    expect(trigger.getAttribute('aria-expanded')).toBe('true');
+    expect(titleSlide.querySelector('.tl-text')?.getAttribute('tabindex')).toBe('0');
     expect(mockTimeline.current_id).toBe(titleSlide.id);
     expect(mockTimeline.options.start_at_slide).toBe(0);
     expect(mockLifecycle.slice(0, 2)).toEqual([
       { type: 'loaded', id: undefined },
       { type: 'change', id: titleSlide.id },
     ]);
-
+    flushFrames();
     const listenersBeforeNavigation = resizeListeners.size;
     act(() => {
       mockTimeline.goTo(1);
     });
-    expect(titleHost.querySelector('[role="tooltip"]')).toBeNull();
     expect(titleSlide.hasAttribute('inert')).toBe(true);
-    const eventHost = container.querySelector('.tl-slide:not(.tl-slide-titleslide) .h5p-tl-slide-description') as HTMLElement;
-    expect(eventHost.classList.contains('h5p-advanced-text')).toBe(true);
-    expect(eventHost.classList.contains('papijo-runtime-tooltips')).toBe(true);
-    (eventHost.querySelector('span') as HTMLElement).click();
-    flushFrames();
-    expect(eventHost.querySelector('[role="tooltip"]')).not.toBeNull();
-
+    const eventHost = container.querySelector('.tl-slide:not(.tl-slide-titleslide) .h5p-tl-slide-description');
+    expect(eventHost?.innerHTML).toContain('<strong>description</strong>');
     act(() => {
       mockTimeline.goTo(0);
     });
-    expect(eventHost.querySelector('[role="tooltip"]')).toBeNull();
-    expect(container.querySelector('.tl-slide-titleslide .h5p-tl-slide-description')).toBe(titleHost);
     expect(titleSlide.hasAttribute('inert')).toBe(false);
-    expect(titleHost.classList.contains('h5p-advanced-text')).toBe(true);
-    expect(titleHost.classList.contains('papijo-runtime-tooltips')).toBe(true);
-    trigger.click();
-    flushFrames();
-    expect(titleHost.querySelector('[role="tooltip"]')).not.toBeNull();
-    expect(titleRuntime?.initialize).toHaveBeenCalledTimes(1);
-    expect(Runtime).toHaveBeenCalledTimes(2);
+    expect(container.querySelector('.tl-slide-titleslide .h5p-tl-slide-description')).toBe(titleHost);
+    expect(Runtime).not.toHaveBeenCalled();
     expect(resizeListeners.size).toBe(listenersBeforeNavigation);
     act(() => {
       ReactDOM.unmountComponentAtNode(container);
     });
-    runtimes.forEach((runtime) => expect(runtime.destroy).toHaveBeenCalledTimes(1));
     expect(resizeListeners.size).toBe(0);
     expect(frames.size).toBe(0);
   });
 
-  it('preserves first-event activation and tooltip resize when there is no title slide', async () => {
+  it('starts on the first event when the title is disabled', async () => {
     await renderTimeline(false);
     const slide = container.querySelector('.tl-slide') as HTMLElement;
-    const host = slide.querySelector('.h5p-tl-slide-description') as HTMLElement;
     expect(slide.hasAttribute('inert')).toBe(false);
     expect(mockTimeline.current_id).toBe(slide.id);
-    (host.querySelector('span') as HTMLElement).click();
+    expect(slide.querySelector('.h5p-tl-slide-description')?.textContent).toContain('Ordinary description');
     flushFrames();
-    expect(host.querySelector('[role="tooltip"]')).not.toBeNull();
-    expect(Runtime).toHaveBeenCalledTimes(1);
-    expect(runtimes[0].initialize).toHaveBeenCalledTimes(1);
+    expect(Runtime).not.toHaveBeenCalled();
   });
 });

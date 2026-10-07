@@ -1,0 +1,2 @@
+# Preserve upstream whitespace in generated vendor CSS.
+dist/bundle.css whitespace=-blank-at-eol

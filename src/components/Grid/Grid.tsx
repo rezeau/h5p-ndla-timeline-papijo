@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getTimelineDescriptionRoute } from '../../H5P/TimelineDescriptionRuntimeAdapter';
+import { getDescriptionText } from '../../utils/description.utils';
 import { EventItemType } from '../../types/EventItemType';
 import { SlideType } from '../../types/SlideType';
 import { MediaBlock } from '../MediaBlock/MediaBlock';
@@ -59,9 +59,7 @@ export const Grid: React.FC<GridProps> = ({ eventItem }) => {
 
             {gridItem.type === 'textContent' && (
               <TextContentBlock
-                textContent={eventItem.description?.params?.text ?? ''}
-                isAdvancedTextPapiJo={!!eventItem.description &&
-                  getTimelineDescriptionRoute(eventItem.description) === 'advanced-text-papijo'}
+                textContent={getDescriptionText(eventItem.description)}
               />
             )}
 

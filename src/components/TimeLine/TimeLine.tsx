@@ -13,7 +13,6 @@ import * as React from 'react';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useEffectOnce } from 'react-use';
 import { buildH5PMediaInstance } from '../../H5P/H5P.util';
-import { TimelineDescriptionTooltipController } from '../../H5P/TimelineDescriptionTooltipController';
 import { H5PContext } from '../../contexts/H5PContext';
 import { L10nContext } from '../../contexts/LocalizationContext';
 import { Params } from '../../types/Params';
@@ -37,13 +36,10 @@ export const TimeLine: React.FC<TimeLineProps> = ({
   contentId,
   onMediaInstanceBuilt,
 }: TimeLineProps) => {
-  const [timelineDefinition, classNames, descriptionRuntimeAdapter] = React.useMemo(
+  const [timelineDefinition, classNames] = React.useMemo(
     () => createTimelineDefinition(timelineTitle, data),
     [data, timelineTitle],
   );
-  const descriptionRuntimeAdapterRef = useRef(descriptionRuntimeAdapter);
-  descriptionRuntimeAdapterRef.current = descriptionRuntimeAdapter;
-  const timelineRef = useRef<Timeline | null>(null);
   if (!data.behaviour) {
     throw new Error('Unexpected error: Missing name');
   }
@@ -121,7 +117,6 @@ export const TimeLine: React.FC<TimeLineProps> = ({
       start_at_slide: startatslidenb,
       start_at_end: startatend,
     });
-    timelineRef.current = timeline;
 
     const timelineContainer = containerRef.current?.querySelector(
       `#${containerId}`,
@@ -220,7 +215,6 @@ export const TimeLine: React.FC<TimeLineProps> = ({
       if (initialResizeFrame !== undefined) {
         window.cancelAnimationFrame(initialResizeFrame);
       }
-      timelineRef.current = null;
     };
   });
 
@@ -339,40 +333,6 @@ export const TimeLine: React.FC<TimeLineProps> = ({
       observer.disconnect();
     };
   }, [timelineIsRendered, translations]);
-
-  // Run after the existing HTML/link repair effect: replacing innerHTML after
-  // tooltip initialization would detach the runtime's trigger listeners.
-  useEffect(() => {
-    const timeline = timelineRef.current;
-    const container = containerRef.current;
-    if (!timelineIsRendered || !timeline || !container) {
-      return;
-    }
-    let resizeFrame: number | undefined;
-    const controller = new TimelineDescriptionTooltipController({
-      adapter: descriptionRuntimeAdapterRef.current,
-      container,
-      timeline,
-      resizeEvents: h5pInstance,
-      contentId,
-      onResize: () => {
-        if (resizeFrame !== undefined) {
-          return;
-        }
-        resizeFrame = window.requestAnimationFrame(() => {
-          resizeFrame = undefined;
-          h5pInstance?.trigger('resize');
-        });
-      },
-    });
-    controller.handleLoaded();
-    return () => {
-      controller.destroy();
-      if (resizeFrame !== undefined) {
-        window.cancelAnimationFrame(resizeFrame);
-      }
-    };
-  }, [timelineIsRendered, contentId, h5pInstance]);
 
   const style: React.CSSProperties = {
     height,

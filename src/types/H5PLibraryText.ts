@@ -1,5 +1,3 @@
-import { H5PImage } from 'h5p-types';
-
 type H5PMetadataAuthor = {
   name: string,
   role: 'Author' | 'Editor' | 'Licensee' | 'Originator',
@@ -27,15 +25,9 @@ type H5PMetadata = {
   contentType?: string
 }
 
-export type H5PTooltipImage = {
-  id: string;
-  image: H5PImage;
-  alt: string;
-};
-
 export type H5PLibraryTextParams = {
   text?: string;
-  tooltipImages?: Array<H5PTooltipImage>;
+  // Legacy fields are retained in incoming data, but have no special runtime.
   [key: string]: unknown;
 }
 

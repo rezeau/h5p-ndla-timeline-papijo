@@ -16,10 +16,7 @@ import { Params } from '../types/Params';
 import { SlideType } from '../types/SlideType';
 import { isDefined } from './is-defined.utils';
 import { H5PContentId } from 'h5p-types';
-import {
-  createTimelineDescriptionHostId,
-  TimelineDescriptionRuntimeAdapter,
-} from '../H5P/TimelineDescriptionRuntimeAdapter';
+import { getDescriptionText } from './description.utils';
 
 const html = String.raw;
 
@@ -144,7 +141,6 @@ const isDateOrderOK = (
 
 export const mapEventToTimelineSlide = (
   event: EventItemType<SlideType>,
-  descriptionRuntimeAdapter = new TimelineDescriptionRuntimeAdapter(),
 ): TimelineSlide => {
   const startDate = event.startDate ? parseDate(event.startDate) : null;
 
@@ -152,19 +148,6 @@ export const mapEventToTimelineSlide = (
   // before we find another way to change slide layouts.
   // Work around h5p-types that fails jest test when importing H5P.
   const id = `${(window as any).H5P.createUUID()}_layout-${event.layout}`;
-  const descriptionIsRendered =
-    event.layout !== 'custom' &&
-    !!event.description &&
-    event.TextOrImage !== 'none' &&
-    event.TextOrImage !== 'image';
-  const descriptionHostId = descriptionIsRendered
-    ? createTimelineDescriptionHostId(id)
-    : undefined;
-
-  const descriptionRuntimeEntry = descriptionHostId && event.description
-    ? descriptionRuntimeAdapter.register(id, descriptionHostId, event.description)
-    : undefined;
-
   let text;
   const eventHasCustomLayout = event.layout === 'custom';
   if (eventHasCustomLayout) {
@@ -183,13 +166,10 @@ export const mapEventToTimelineSlide = (
       );
     }
     text = tagsMarkup;
-    // Check if event.description.params.text is undefined or not.
     if (event.TextOrImage !== 'none') {
       if (event.description && event.TextOrImage !== 'image') {
-        const descriptionClassName = 'h5p-tl-slide-description' +
-          (descriptionRuntimeEntry?.route === 'advanced-text-papijo' ? ' h5p-advanced-text' : '');
-        text += html`<div id="${descriptionHostId}" class="${descriptionClassName}">
-          ${event.description.params.text ?? ''}
+        text += html`<div class="h5p-tl-slide-description">
+          ${getDescriptionText(event.description)}
         </div>`;
       }
       else if (event.descriptionImage && event.TextOrImage === 'image') {
@@ -286,15 +266,10 @@ export const mapEraToTimelineEra = (era: Era): TimelineEra | null => {
 export const createTimelineDefinition = (
   title: string,
   data: Params,
-): [
-  TimelineDefinition,
-  string | undefined,
-  TimelineDescriptionRuntimeAdapter,
-] => {
-  const descriptionRuntimeAdapter = new TimelineDescriptionRuntimeAdapter();
+): [TimelineDefinition, string | undefined] => {
   const items = data.timelineItems ?? [];
   const events = items
-    .map((item) => mapEventToTimelineSlide(item, descriptionRuntimeAdapter))
+    .map(mapEventToTimelineSlide)
     .filter(isDefined);
   const eras = (data.eras ?? []).map(mapEraToTimelineEra).filter(isDefined);
 
@@ -308,7 +283,7 @@ export const createTimelineDefinition = (
     data.titleSlide.title = data.titleSlide.title ?? title;
     timeline.title =
       data.titleSlide &&
-      mapEventToTimelineSlide(data.titleSlide, descriptionRuntimeAdapter);
+      mapEventToTimelineSlide(data.titleSlide);
   }
 
   let classNames: string | undefined;
@@ -323,7 +298,7 @@ export const createTimelineDefinition = (
     timeline.scale = scalingMode;
   }
 
-  return [timeline, classNames, descriptionRuntimeAdapter];
+  return [timeline, classNames];
 };
 
 export const fallbackLocale = 'en';

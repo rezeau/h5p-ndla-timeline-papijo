@@ -11,7 +11,8 @@ export type EventItemType<S extends SlideType> = {
 
   slideType: S;
 
-  description?: H5PLibraryText;
+  // New content stores HTML directly; retain the old wrapper for runtime reads.
+  description?: string | H5PLibraryText;
   descriptionImage?: H5PImage;
   descriptionCopyright?: H5PCopyright;
   TextOrImage?: string;

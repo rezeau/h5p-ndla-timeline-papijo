@@ -1,13 +1,14 @@
 {
   "name": "h5p-timeline papi Jo",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "",
   "keywords": [],
   "author": "NDLA & papi Jo",
   "license": "MPL",
   "scripts": {
     "watch": "webpack --mode=development --watch",
-    "build": "webpack --mode=production",
+    "build:upgrades": "node scripts/build-upgrades.js",
+    "build": "npm run build:upgrades && webpack --mode=production",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
